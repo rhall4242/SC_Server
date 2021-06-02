@@ -12,9 +12,14 @@
 
 #include <JuceHeader.h>
 
+///
+/// Connector - base class of connectors
+///
+
 class Connector 
 {
 public:
+  Connector(juce::String nm) {name = nm;}
   virtual bool isInput() = 0;
   virtual bool isOutput() = 0;
   virtual bool isMono() = 0;
@@ -24,13 +29,19 @@ public:
   virtual bool isAudio() = 0;
   virtual bool isControl() = 0; 
   bool isConnected() {return connected;}
+  juce::String getName() {return name;}
 protected:
   void setConnected(bool val) {connected = val;}
 private:
   bool connected {false};
+  juce::String name {"{unnamed}"};
 };
 
 class OutputConnector;
+
+///
+/// InputConnector - base class of input connectors
+///
 
 class InputConnector : public Connector
 {
@@ -46,6 +57,10 @@ public:
   OutputConnector &from;
 };
 
+///
+/// OutputConnector - base class of output connectors
+///
+
 class OutputConnector : public Connector
 {
 public:
@@ -60,6 +75,10 @@ public:
   std::map<juce::String, InputConnector&> to;
 };
 
+///
+/// MidiInputConnector - base class of MIDI input connectors
+///
+
 class MidiInputConnector : public InputConnector
 {
 public:
@@ -70,6 +89,10 @@ public:
   bool isAudio() override {return false;}
   bool isControl() override {return false;} 
 };
+
+///
+/// OscInputConnector - base class of OSC input connectors
+///
 
 class OscInputConnector : public InputConnector
 {
@@ -82,6 +105,10 @@ public:
   bool isControl() override {return false;} 
 };
 
+///
+/// AudioInputConnector - base class of audio input connectors
+///
+
 class AudioInputConnector : public InputConnector
 {
 public:
@@ -92,6 +119,10 @@ public:
   bool isAudio() override {return true;}
   bool isControl() override {return false;} 
 };
+
+///
+/// ControlConnector - base class of control input connectors
+///
 
 class ControlInputConnector : public InputConnector
 {
@@ -104,6 +135,10 @@ public:
   bool isControl() override {return true;} 
 };
 
+///
+/// MidiOutputConnector - base class of MIDI output connectors
+///
+
 class MidiOutputConnector : public OutputConnector
 {
 public:
@@ -114,6 +149,10 @@ public:
   bool isAudio() override {return false;}
   bool isControl() override {return false;} 
 };
+
+///
+/// OscOutputConnector - base class of OSC output connectors
+///
 
 class OscOutputConnector : public OutputConnector
 {
@@ -126,6 +165,10 @@ public:
   bool isControl() override {return false;} 
 };
 
+///
+/// AudioOutputConnector - base class of audio output connectors
+///
+
 class AudioOutputConnector : public OutputConnector
 {
 public:
@@ -136,6 +179,10 @@ public:
   bool isAudio() override {return true;}
   bool isControl() override {return false;} 
 };
+
+///
+/// ControlOutputConnector - base class of control output connectors
+///
 
 class ControlOutputConnector : public OutputConnector
 {
@@ -148,4 +195,66 @@ public:
   bool isControl() override {return true;} 
 };
 
+class MonoAudioInputConnector : public AudioInputConnector
+{
+public:
+  bool isMono() {return true;}
+  bool isPoly() {return false;}
+};
 
+class MonoControlInputConnector : public ControlInputConnector
+{
+public:
+  bool isMono() {return true;}
+  bool isPoly() {return false;}
+};
+
+class MonoAudioOutputConnector : public AudioOutputConnector
+{
+public:
+  bool isMono() {return true;}
+  bool isPoly() {return false;}
+};
+
+class MonoControlOutputConnector : public ControlOutputConnector
+{
+public:
+  bool isMono() {return true;}
+  bool isPoly() {return false;}
+};
+
+class PolyAudioInputConnector : public AudioInputConnector
+{
+public:
+  bool isMono() {return false;}
+  bool isPoly() {return true;}
+};
+
+class PolyControlInputConnector : public ControlInputConnector
+{
+public:
+  bool isMono() {return false;}
+  bool isPoly() {return true;}
+};
+
+class PolyAudioOutputConnector : public AudioOutputConnector
+{
+public:
+  bool isMono() {return false;}
+  bool isPoly() {return true;}
+};
+
+class PolyControlOutputConnector : public ControlOutputConnector
+{
+public:
+  bool isMono() {return false;}
+  bool isPoly() {return true;}
+};
+
+class Connection
+{
+public:
+  OutputConnector& from;
+  InputConnector& to;
+
+};
