@@ -9,6 +9,9 @@
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
 
+extern int testmain(int, const char*[]);
+const char * argv[] {"SC_Server"};
+
 //==============================================================================
 SC_ServerAudioProcessorEditor::SC_ServerAudioProcessorEditor (SC_ServerAudioProcessor& p)
     : AudioProcessorEditor (&p), audioProcessor (p)
@@ -16,6 +19,7 @@ SC_ServerAudioProcessorEditor::SC_ServerAudioProcessorEditor (SC_ServerAudioProc
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+    testmain(1, argv);
 }
 
 SC_ServerAudioProcessorEditor::~SC_ServerAudioProcessorEditor()

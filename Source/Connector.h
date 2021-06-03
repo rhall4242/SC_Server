@@ -19,7 +19,7 @@
 class Connector 
 {
 public:
-  Connector(juce::String nm) {name = nm;}
+//  Connector(juce::String nm) {name = nm;}
   virtual bool isInput() = 0;
   virtual bool isOutput() = 0;
   virtual bool isMono() = 0;
@@ -29,12 +29,12 @@ public:
   virtual bool isAudio() = 0;
   virtual bool isControl() = 0; 
   bool isConnected() {return connected;}
+  virtual void setConnected(bool v) {connected = v;}
   juce::String getName() {return name;}
 protected:
-  void setConnected(bool val) {connected = val;}
+  juce::String name {"{unnamed}"};
 private:
   bool connected {false};
-  juce::String name {"{unnamed}"};
 };
 
 class OutputConnector;
@@ -54,7 +54,7 @@ public:
   virtual bool isOsc() = 0;
   virtual bool isAudio() = 0;
   virtual bool isControl() = 0;
-  OutputConnector &from;
+  OutputConnector* from;
 };
 
 ///
@@ -72,7 +72,7 @@ public:
   virtual bool isOsc() = 0;
   virtual bool isAudio() = 0;
   virtual bool isControl() = 0; 
-  std::map<juce::String, InputConnector&> to;
+  std::map<juce::String, InputConnector*> to;
 };
 
 ///
@@ -200,6 +200,7 @@ class MonoAudioInputConnector : public AudioInputConnector
 public:
   bool isMono() {return true;}
   bool isPoly() {return false;}
+  MonoAudioInputConnector(juce::String nm) {name = nm;}
 };
 
 class MonoControlInputConnector : public ControlInputConnector
@@ -214,6 +215,7 @@ class MonoAudioOutputConnector : public AudioOutputConnector
 public:
   bool isMono() {return true;}
   bool isPoly() {return false;}
+  MonoAudioOutputConnector(juce::String nm) {name = nm;}
 };
 
 class MonoControlOutputConnector : public ControlOutputConnector
@@ -254,7 +256,7 @@ public:
 class Connection
 {
 public:
-  OutputConnector& from;
-  InputConnector& to;
-
+  OutputConnector* from;
+  InputConnector* to;
+  void connect(OutputConnector* f, InputConnector* t);
 };
