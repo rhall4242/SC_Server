@@ -5,6 +5,9 @@
               cppLanguageStandard="17">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="QLUFIt" name="MidiInputNode.cpp" compile="1" resource="0"
+            file="Source/MidiInputNode.cpp"/>
+      <FILE id="BA54zB" name="MidiInputNode.h" compile="0" resource="0" file="Source/MidiInputNode.h"/>
       <FILE id="dQaldy" name="Node.cpp" compile="1" resource="0" file="Source/Node.cpp"/>
       <FILE id="sLTCaJ" name="Node.h" compile="0" resource="0" file="Source/Node.h"/>
       <FILE id="y7v4OM" name="Value.cpp" compile="1" resource="0" file="Source/Value.cpp"/>

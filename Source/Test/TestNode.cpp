@@ -18,7 +18,7 @@ struct NodeTestFixture
   Node node;
 };
 
-TEST_CASE(NodeTestFixture, Test1) 
+TEST_CASE(NodeTestFixture, Test5) 
 {
   Connection c;
   c.connect(&out, &inp);

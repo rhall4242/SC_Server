@@ -56,3 +56,5 @@ Builds/LinuxMakefile/build/SC_Server.a
 Builds/LinuxMakefile/make_helpers/arch_detection.cpp
 Builds/LinuxMakefile/make_helpers/arch_detection.cpp
 SC_Server.code-workspace
+Builds/LinuxMakefile/build/intermediate/Debug/MidiInputNode_84b978ac.d
+Builds/LinuxMakefile/build/intermediate/Debug/MidiInputNode_84b978ac.o
