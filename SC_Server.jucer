@@ -5,6 +5,8 @@
               cppLanguageStandard="17">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="dQaldy" name="Node.cpp" compile="1" resource="0" file="Source/Node.cpp"/>
+      <FILE id="sLTCaJ" name="Node.h" compile="0" resource="0" file="Source/Node.h"/>
       <FILE id="y7v4OM" name="Value.cpp" compile="1" resource="0" file="Source/Value.cpp"/>
       <FILE id="bdNbGD" name="Value.h" compile="0" resource="0" file="Source/Value.h"/>
       <GROUP id="{F7D7C4BB-8146-D365-EDF4-787DFCD8F541}" name="Test">
@@ -13,6 +15,7 @@
         <FILE id="I7NxoJ" name="TestConnection.cpp" compile="1" resource="0"
               file="Source/Test/TestConnection.cpp"/>
         <FILE id="Fb0t50" name="TestMain.cpp" compile="1" resource="0" file="Source/Test/TestMain.cpp"/>
+        <FILE id="zRlW4o" name="TestNode.cpp" compile="1" resource="0" file="Source/Test/TestNode.cpp"/>
       </GROUP>
       <FILE id="nosrWK" name="Connector.cpp" compile="1" resource="0" file="Source/Connector.cpp"/>
       <FILE id="uSbnxB" name="Connector.h" compile="0" resource="0" file="Source/Connector.h"/>
