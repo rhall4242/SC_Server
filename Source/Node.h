@@ -32,3 +32,8 @@ public:
 
   virtual void process(int64_t ticks) = 0;
 };
+
+class NodeTree : public std::map<juce::String, Node*>
+{
+
+};

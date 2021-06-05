@@ -142,8 +142,8 @@ public:
 class MidiOutputConnector : public OutputConnector
 {
 public:
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0;
+  bool isMono() override {return true;}
+  bool isPoly() override {return false;}
   bool isMidi() override {return true;}
   bool isOsc() override {return false;}
   bool isAudio() override {return false;}

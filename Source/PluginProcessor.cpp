@@ -19,9 +19,14 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
                       #endif
                        .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
                      #endif
-                       )
+                       ), apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
+    synth.addSound(new SynthSound());
+    for (int i = 0; i < 1; i++)
+    {
+        synth.addVoice(new SynthVoice());
+    }
 }
 
 SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
@@ -31,7 +36,7 @@ SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
 //==============================================================================
 const juce::String SC_ServerAudioProcessor::getName() const
 {
-    return JucePlugin_Name;
+    return "SC_Server";
 }
 
 bool SC_ServerAudioProcessor::acceptsMidi() const
@@ -93,8 +98,7 @@ void SC_ServerAudioProcessor::changeProgramName (int index, const juce::String& 
 //==============================================================================
 void SC_ServerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    // Use this method as the place to do any pre-playback
-    // initialisation that you need..
+    MidiInputNode midiInputNode("SysMidiInputNode");
 }
 
 void SC_ServerAudioProcessor::releaseResources()
@@ -188,4 +192,11 @@ void SC_ServerAudioProcessor::setStateInformation (const void* data, int sizeInB
 juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 {
     return new SC_ServerAudioProcessor();
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout SC_ServerAudioProcessor::createParams()
+{
+    std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+
+    return {params.begin(), params.end()};
 }

@@ -10,6 +10,13 @@
 
 #include "MidiInputNode.h"
 
+MidiInputNode::MidiInputNode(juce::String nm)
+{
+  name = nm;
+  MidiOutputConnector out;
+  outputs[nm] = &out;
+}
+
 void MidiInputNode::process(int64_t ticks)
 {
 

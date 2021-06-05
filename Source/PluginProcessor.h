@@ -10,12 +10,19 @@
 
 #include <JuceHeader.h>
 
+#include "SynthSound.h"
+#include "SynthVoice.h"
+
+#include "Node.h"
+#include "MidiInputNode.h"
+
 //==============================================================================
 /**
 */
 class SC_ServerAudioProcessor  : public juce::AudioProcessor
 {
 public:
+
     //==============================================================================
     SC_ServerAudioProcessor();
     ~SC_ServerAudioProcessor() override;
@@ -52,8 +59,15 @@ public:
     //==============================================================================
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
+    juce::AudioProcessorValueTreeState apvts;
+    NodeTree nodeTree;
+
 
 private:
+
+    juce::Synthesiser synth;
+    juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SC_ServerAudioProcessor)
 };

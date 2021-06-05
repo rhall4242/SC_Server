@@ -63,7 +63,7 @@ struct NodeTestFixture
 { 
   MonoAudioInputConnector inp {"Input"};
   MonoAudioOutputConnector out {"Output"};
-  MidiInputNode node;
+  MidiInputNode testNode {"TestNode"};
 };
 
 TEST_CASE(NodeTestFixture, Test5) 
