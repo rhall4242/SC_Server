@@ -7,7 +7,7 @@
 
   ==============================================================================
 */
-
+#include "../MidiInputNode.h"
 #include  "../Connector.h"
 #include "CppUnitTestFramework.hpp"
 
@@ -58,3 +58,18 @@ int testmain(int argc, const char* argv[]) {
 
     return success ? 0 : 1;
 }
+
+struct NodeTestFixture 
+{ 
+  MonoAudioInputConnector inp {"Input"};
+  MonoAudioOutputConnector out {"Output"};
+  MidiInputNode node;
+};
+
+TEST_CASE(NodeTestFixture, Test5) 
+{
+  Connection c;
+  c.connect(&out, &inp);
+  CHECK_EQUAL(c.to, &inp);
+};
+

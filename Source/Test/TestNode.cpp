@@ -8,14 +8,14 @@
   ==============================================================================
 */
 
-#include  "../Node.h"
+#include  "../MidiInputNode.h"
 #include "CppUnitTestFramework.hpp"
-
+/*
 struct NodeTestFixture 
 { 
   MonoAudioInputConnector inp {"Input"};
   MonoAudioOutputConnector out {"Output"};
-  Node node;
+  MidiInputNode node;
 };
 
 TEST_CASE(NodeTestFixture, Test5) 
@@ -25,3 +25,4 @@ TEST_CASE(NodeTestFixture, Test5)
   CHECK_EQUAL(c.to, &inp);
 };
 
+*/

@@ -5,6 +5,9 @@
               cppLanguageStandard="17">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="o2AiVY" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
+      <FILE id="Uj9pXs" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
+      <FILE id="Uu1FgD" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
       <FILE id="QLUFIt" name="MidiInputNode.cpp" compile="1" resource="0"
             file="Source/MidiInputNode.cpp"/>
       <FILE id="BA54zB" name="MidiInputNode.h" compile="0" resource="0" file="Source/MidiInputNode.h"/>
@@ -52,6 +55,7 @@
         <MODULEPATH id="juce_osc" path="../../modules"/>
         <MODULEPATH id="juce_audio_plugin_client" path="../../modules"/>
         <MODULEPATH id="juce_gui_basics" path="../../modules"/>
+        <MODULEPATH id="juce_dsp" path="../../modules"/>
       </MODULEPATHS>
     </LINUX_MAKE>
   </EXPORTFORMATS>
@@ -65,6 +69,7 @@
     <MODULE id="juce_audio_utils" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_core" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_data_structures" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
+    <MODULE id="juce_dsp" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_events" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_graphics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>
     <MODULE id="juce_gui_basics" showAllCode="1" useLocalCopy="0" useGlobalPath="1"/>

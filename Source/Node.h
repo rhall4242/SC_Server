@@ -29,4 +29,6 @@ public:
   std::map<juce::String, InputConnector*> inputs;
   std::map<juce::String, OutputConnector*> outputs;
   juce::String name;
+
+  virtual void process(int64_t ticks) = 0;
 };

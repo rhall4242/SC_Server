@@ -9,3 +9,8 @@
 */
 
 #include "MidiInputNode.h"
+
+void MidiInputNode::process(int64_t ticks)
+{
+
+}

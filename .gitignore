@@ -58,3 +58,7 @@ Builds/LinuxMakefile/make_helpers/arch_detection.cpp
 SC_Server.code-workspace
 Builds/LinuxMakefile/build/intermediate/Debug/MidiInputNode_84b978ac.d
 Builds/LinuxMakefile/build/intermediate/Debug/MidiInputNode_84b978ac.o
+Builds/LinuxMakefile/build/intermediate/Debug/include_juce_dsp_aeb2060f.d
+Builds/LinuxMakefile/build/intermediate/Debug/include_juce_dsp_aeb2060f.o
+Builds/LinuxMakefile/build/intermediate/Debug/SynthVoice_279f55df.d
+Builds/LinuxMakefile/build/intermediate/Debug/SynthVoice_279f55df.o

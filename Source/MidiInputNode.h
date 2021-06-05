@@ -17,4 +17,6 @@ class MidiInputNode : public Node
 {
 public:
   NodeType type {MIDI_Input_Node};
+
+  void process(int64_t ticks);
 };
