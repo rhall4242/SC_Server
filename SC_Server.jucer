@@ -5,6 +5,8 @@
               cppLanguageStandard="17">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="w1RLXw" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
+      <FILE id="IJ05jE" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
       <FILE id="o2AiVY" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="Uj9pXs" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="Uu1FgD" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>

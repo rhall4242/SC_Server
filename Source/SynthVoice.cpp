@@ -10,12 +10,18 @@
 
 #include "SynthVoice.h"
 
+SynthVoice::SynthVoice(Synth* s) : synth(s)
+{
+}
+
 bool SynthVoice::canPlaySound(juce::SynthesiserSound *sound)
 {
   return dynamic_cast<juce::SynthesiserSound*>(sound) != nullptr;
 }
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
+  
+//  MidiInputNode node = 
 //  osc.setWaveFrequency(midiNoteNumber);
 //  adsr.noteOn();
 }

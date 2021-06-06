@@ -33,7 +33,9 @@ public:
   virtual void process(int64_t ticks) = 0;
 };
 
-class NodeTree : public std::map<juce::String, Node*>
+class NodeTree : virtual public std::map<juce::String, Node*>
 {
-
+public:
+  void addNode(Node *node);
+  Node *getByName(juce::String name);
 };

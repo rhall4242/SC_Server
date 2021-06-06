@@ -43,7 +43,7 @@ class OutputConnector;
 /// InputConnector - base class of input connectors
 ///
 
-class InputConnector : public Connector
+class InputConnector : virtual public Connector
 {
 public:
   bool isInput() override {return true;}
@@ -61,7 +61,7 @@ public:
 /// OutputConnector - base class of output connectors
 ///
 
-class OutputConnector : public Connector
+class OutputConnector : virtual public Connector
 {
 public:
   bool isInput() override {return false;}
@@ -79,7 +79,7 @@ public:
 /// MidiInputConnector - base class of MIDI input connectors
 ///
 
-class MidiInputConnector : public InputConnector
+class MidiInputConnector : virtual public InputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -94,7 +94,7 @@ public:
 /// OscInputConnector - base class of OSC input connectors
 ///
 
-class OscInputConnector : public InputConnector
+class OscInputConnector : virtual public InputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -109,7 +109,7 @@ public:
 /// AudioInputConnector - base class of audio input connectors
 ///
 
-class AudioInputConnector : public InputConnector
+class AudioInputConnector : virtual public InputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -124,7 +124,7 @@ public:
 /// ControlConnector - base class of control input connectors
 ///
 
-class ControlInputConnector : public InputConnector
+class ControlInputConnector : virtual public InputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -139,7 +139,7 @@ public:
 /// MidiOutputConnector - base class of MIDI output connectors
 ///
 
-class MidiOutputConnector : public OutputConnector
+class MidiOutputConnector : virtual public OutputConnector
 {
 public:
   bool isMono() override {return true;}
@@ -154,7 +154,7 @@ public:
 /// OscOutputConnector - base class of OSC output connectors
 ///
 
-class OscOutputConnector : public OutputConnector
+class OscOutputConnector : virtual public OutputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -169,7 +169,7 @@ public:
 /// AudioOutputConnector - base class of audio output connectors
 ///
 
-class AudioOutputConnector : public OutputConnector
+class AudioOutputConnector : virtual public OutputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -184,7 +184,7 @@ public:
 /// ControlOutputConnector - base class of control output connectors
 ///
 
-class ControlOutputConnector : public OutputConnector
+class ControlOutputConnector : virtual public OutputConnector
 {
 public:
   virtual bool isMono() = 0;
@@ -195,7 +195,7 @@ public:
   bool isControl() override {return true;} 
 };
 
-class MonoAudioInputConnector : public AudioInputConnector
+class MonoAudioInputConnector : virtual public AudioInputConnector
 {
 public:
   bool isMono() {return true;}
@@ -203,14 +203,14 @@ public:
   MonoAudioInputConnector(juce::String nm) {name = nm;}
 };
 
-class MonoControlInputConnector : public ControlInputConnector
+class MonoControlInputConnector : virtual public ControlInputConnector
 {
 public:
   bool isMono() {return true;}
   bool isPoly() {return false;}
 };
 
-class MonoAudioOutputConnector : public AudioOutputConnector
+class MonoAudioOutputConnector : virtual public AudioOutputConnector
 {
 public:
   bool isMono() {return true;}
@@ -218,35 +218,35 @@ public:
   MonoAudioOutputConnector(juce::String nm) {name = nm;}
 };
 
-class MonoControlOutputConnector : public ControlOutputConnector
+class MonoControlOutputConnector : virtual public ControlOutputConnector
 {
 public:
   bool isMono() {return true;}
   bool isPoly() {return false;}
 };
 
-class PolyAudioInputConnector : public AudioInputConnector
+class PolyAudioInputConnector : virtual public AudioInputConnector
 {
 public:
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
 
-class PolyControlInputConnector : public ControlInputConnector
+class PolyControlInputConnector : virtual public ControlInputConnector
 {
 public:
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
 
-class PolyAudioOutputConnector : public AudioOutputConnector
+class PolyAudioOutputConnector : virtual public AudioOutputConnector
 {
 public:
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
 
-class PolyControlOutputConnector : public ControlOutputConnector
+class PolyControlOutputConnector : virtual public ControlOutputConnector
 {
 public:
   bool isMono() {return false;}

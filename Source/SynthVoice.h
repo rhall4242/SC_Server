@@ -11,12 +11,14 @@
 #pragma once
 
 #include <JuceHeader.h>
+#include "Synth.h"
 #include "SynthSound.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
 
   public:
+    SynthVoice(Synth* s);
     bool canPlaySound(juce::SynthesiserSound *sound) override;
     void startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition) override;
     void stopNote(float velocity, bool allowTailOff) override;
@@ -26,9 +28,9 @@ class SynthVoice : public juce::SynthesiserVoice
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     void update(const float attack, const float decay, const float sustain, const float release);
 
-   
   private:
 
+    Synth* synth;
     juce::AudioBuffer<float> synthBuffer;
 
     juce::dsp::Gain<float> gain;

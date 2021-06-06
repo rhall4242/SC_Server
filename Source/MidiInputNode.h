@@ -13,8 +13,9 @@
 #include <JuceHeader.h>
 #include "Connector.h"
 #include "Node.h"
+#include "Value.h"
 
-class MidiInputNode : public Node
+class MidiInputNode : virtual public Node
 {
 public:
   MidiInputNode(juce::String nm);
@@ -22,5 +23,13 @@ public:
   NodeType type {MIDI_Input_Node};
   juce::String name {"unnamed"};
 
-  void process(int64_t ticks);
+  void process(int64_t ticks) override;
+
+  void setValue(MidiNoteValue val) { value = val; }
+  MidiNoteValue getValue() { return value; }
+
+private:
+
+  MidiNoteValue value;
+
 };

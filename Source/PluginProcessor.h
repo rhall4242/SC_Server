@@ -10,6 +10,7 @@
 
 #include <JuceHeader.h>
 
+#include "Synth.h"
 #include "SynthSound.h"
 #include "SynthVoice.h"
 
@@ -22,6 +23,7 @@
 class SC_ServerAudioProcessor  : public juce::AudioProcessor
 {
 public:
+    int maxPolyphony = 1;
 
     //==============================================================================
     SC_ServerAudioProcessor();
@@ -60,12 +62,11 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioProcessorValueTreeState apvts;
-    NodeTree nodeTree;
 
 
 private:
 
-    juce::Synthesiser synth;
+    Synth synth;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
 
     //==============================================================================

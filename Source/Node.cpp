@@ -9,3 +9,14 @@
 */
 
 #include "Node.h"
+
+void NodeTree::addNode(Node* node)
+{
+  juce::String name = node->name;
+  insert(std::pair(name, node));
+}
+
+Node* NodeTree::getByName(juce::String name)
+{
+  return (*this)[name];
+}
