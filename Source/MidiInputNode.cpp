@@ -12,9 +12,9 @@
 
 MidiInputNode::MidiInputNode(juce::String nm)
 {
-  name = nm;
-  MidiOutputConnector out;
-  outputs[nm] = &out;
+  name = juce::String(nm);
+  MidiOutputConnector* out = new MidiOutputConnector("MidiOutput");
+  outputs[out->getName()] = out;
 }
 
 void MidiInputNode::process(int64_t ticks)

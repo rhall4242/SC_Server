@@ -21,7 +21,7 @@ public:
   MidiInputNode(juce::String nm);
 
   NodeType type {MIDI_Input_Node};
-  juce::String name {"unnamed"};
+//  juce::String name {"unnamed"};
 
   void process(int64_t ticks) override;
 

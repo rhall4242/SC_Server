@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <JUCERPROJECT id="C9ZE0q" name="SC_Server" projectType="audioplug" useAppConfig="0"
-              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth"
-              cppLanguageStandard="17">
+              addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
+              cppLanguageStandard="17" pluginVST3Category="Instrument,Stereo,Synth">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
       <FILE id="w1RLXw" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>

@@ -18,27 +18,41 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound *sound)
 {
   return dynamic_cast<juce::SynthesiserSound*>(sound) != nullptr;
 }
+
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
-  
-//  MidiInputNode node = 
+  std::cout << "Midi Note" << midiNoteNumber << ", " << velocity << std::endl;
+  MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
+  MidiNoteValue* val = new MidiNoteValue();
+  val->note = midiNoteNumber;
+  val->vel = (int) (velocity * 127.0f);
+  node->setValue(*val);
+
 //  osc.setWaveFrequency(midiNoteNumber);
 //  adsr.noteOn();
 }
 void SynthVoice::stopNote(float velocity, bool allowTailOff)
 {
 //  adsr.noteOff();
+  MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
+  MidiNoteValue* val = new MidiNoteValue();
+  val->note = 0;
+  val->vel = 0;
+  node->setValue(*val);
   if (!allowTailOff ) //|| !adsr.isActive())
   {
     clearCurrentNote();
   }
 }
+
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue)
 {
 }
+
 void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue) 
 {
 }
+
 void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
 {
  
@@ -52,6 +66,7 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
   gain.setGainLinear(0.35f);
   isPrepared = true;
 }
+
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
   jassert(isPrepared);

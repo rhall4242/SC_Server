@@ -13,6 +13,7 @@
 #include <JuceHeader.h>
 #include "Synth.h"
 #include "SynthSound.h"
+#include "MidiInputNode.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {

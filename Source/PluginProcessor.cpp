@@ -98,8 +98,8 @@ void SC_ServerAudioProcessor::changeProgramName (int index, const juce::String& 
 //==============================================================================
 void SC_ServerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    MidiInputNode midiInputNode("SysMidiInputNode");
-    synth.nodeTree.addNode(&midiInputNode);
+    MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
+    synth.nodeTree.addNode(midiInputNode);
     synth.setCurrentPlaybackSampleRate(sampleRate);
 
     for (int i = 0; i < synth.getNumVoices(); i++)
