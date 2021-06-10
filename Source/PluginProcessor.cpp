@@ -24,11 +24,15 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
 {
     MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
     synth.nodeTree.addNode(midiInputNode);
+    SimpleOscNode* simpleOscNode = new SimpleOscNode("SysSimpleOscNode");
+    synth.nodeTree.addNode(simpleOscNode);
+    AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioInputNode");
+    synth.nodeTree.addNode(audioOutputNode);
     synth.addSound(new SynthSound());
-    for (int i = 0; i < maxPolyphony; i++)
-    {
+//    for (int i = 0; i < maxPolyphony; i++)
+//    {
         synth.addVoice(new SynthVoice(&synth));
-    }
+//    }
 }
 
 SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
@@ -159,6 +163,7 @@ void SC_ServerAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer, ju
     for (auto i = totalNumInputChannels; i < totalNumOutputChannels; ++i)
         buffer.clear (i, 0, buffer.getNumSamples());
 
+    synth.renderNextBlock(buffer, midiMessages, 0, buffer.getNumSamples());
     // This is the place where you'd normally do the guts of your plugin's
     // audio processing...
     // Make sure to reset the state if your inner loop is processing
@@ -208,6 +213,7 @@ juce::AudioProcessor* JUCE_CALLTYPE createPluginFilter()
 juce::AudioProcessorValueTreeState::ParameterLayout SC_ServerAudioProcessor::createParams()
 {
     std::vector<std::unique_ptr<juce::RangedAudioParameter>> params;
+    params.push_back(std::make_unique<juce::AudioParameterFloat> ("GAIN", "Gain", juce::NormalisableRange<float> {0.01f, 1.0f,  0.01f, 0.3f}, 0.25f));
 
     return {params.begin(), params.end()};
 }

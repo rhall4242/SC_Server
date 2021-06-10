@@ -16,6 +16,8 @@
 
 #include "Node.h"
 #include "MidiInputNode.h"
+#include "SimpleOscNode.h"
+#include "AudioOutputNode.h"
 
 //==============================================================================
 /**

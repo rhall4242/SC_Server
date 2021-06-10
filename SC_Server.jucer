@@ -5,6 +5,13 @@
               pluginVST3Category="Instrument,Synth" pluginManufacturer="Hallwood Engineering">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="He9EAK" name="AudioOutputNode.cpp" compile="1" resource="0"
+            file="Source/AudioOutputNode.cpp"/>
+      <FILE id="N3nWkW" name="AudioOutputNode.h" compile="0" resource="0"
+            file="Source/AudioOutputNode.h"/>
+      <FILE id="QTtaa0" name="SimpleOscNode.cpp" compile="1" resource="0"
+            file="Source/SimpleOscNode.cpp"/>
+      <FILE id="zauvc9" name="SimpleOscNode.h" compile="0" resource="0" file="Source/SimpleOscNode.h"/>
       <FILE id="w1RLXw" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
       <FILE id="IJ05jE" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
       <FILE id="o2AiVY" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
