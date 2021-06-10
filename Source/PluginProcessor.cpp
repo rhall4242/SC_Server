@@ -22,6 +22,8 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
                        ), apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
+    MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
+    synth.nodeTree.addNode(midiInputNode);
     synth.addSound(new SynthSound());
     for (int i = 0; i < maxPolyphony; i++)
     {
@@ -98,8 +100,6 @@ void SC_ServerAudioProcessor::changeProgramName (int index, const juce::String& 
 //==============================================================================
 void SC_ServerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBlock)
 {
-    MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
-    synth.nodeTree.addNode(midiInputNode);
     synth.setCurrentPlaybackSampleRate(sampleRate);
 
     for (int i = 0; i < synth.getNumVoices(); i++)
@@ -109,6 +109,7 @@ void SC_ServerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBl
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
+    std::cout << "SC_Server Initialized" << std::endl;
 }
 
 void SC_ServerAudioProcessor::releaseResources()

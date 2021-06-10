@@ -13,7 +13,7 @@
 void NodeTree::addNode(Node* node)
 {
   juce::String name = node->name;
-  insert(std::pair(name, node));
+  insert(std::pair<juce::String, Node*>(name, node));
 }
 
 Node* NodeTree::getByName(juce::String name)

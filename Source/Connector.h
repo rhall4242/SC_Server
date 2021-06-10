@@ -68,7 +68,7 @@ class OutputConnector : virtual public Connector
 {
 public:
   OutputConnector() {}
-  OutputConnector(juce::String nm)   {}
+  OutputConnector(juce::String nm) : Connector(nm)   {}
   bool isInput() override {return false;}
   bool isOutput() override {return true;}
   virtual bool isMono() = 0;
@@ -88,7 +88,7 @@ class MidiInputConnector : virtual public InputConnector
 {
 public:
   MidiInputConnector() {}
-  MidiInputConnector(juce::String nm)   {}
+  MidiInputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return true;}
@@ -105,7 +105,7 @@ class OscInputConnector : virtual public InputConnector
 {
 public:
   OscInputConnector() {}
-  OscInputConnector(juce::String nm)   {}
+  OscInputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return false;}
@@ -122,7 +122,7 @@ class AudioInputConnector : virtual public InputConnector
 {
 public:
   AudioInputConnector() {}
-  AudioInputConnector(juce::String nm) : InputConnector(nm)  {}
+  AudioInputConnector(juce::String nm) : Connector(nm)  {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return false;}
@@ -139,7 +139,7 @@ class ControlInputConnector : virtual public InputConnector
 {
 public:
   ControlInputConnector() {}
-  ControlInputConnector(juce::String nm)   {}
+  ControlInputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0; 
   bool isMidi() override {return false;}
@@ -156,7 +156,7 @@ class MidiOutputConnector : virtual public OutputConnector
 {
 public:
   MidiOutputConnector() {}
-  MidiOutputConnector(juce::String nm)   {}
+  MidiOutputConnector(juce::String nm)  : Connector(nm)  {}
   bool isMono() override {return true;}
   bool isPoly() override {return false;}
   bool isMidi() override {return true;}
@@ -173,7 +173,7 @@ class OscOutputConnector : virtual public OutputConnector
 {
 public:
   OscOutputConnector() {}
-  OscOutputConnector(juce::String nm)   {}
+  OscOutputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return false;}
@@ -190,7 +190,7 @@ class AudioOutputConnector : virtual public OutputConnector
 {
 public:
   AudioOutputConnector() {}
-  AudioOutputConnector(juce::String nm)   {}
+  AudioOutputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return false;}
@@ -207,7 +207,7 @@ class ControlOutputConnector : virtual public OutputConnector
 {
 public:
   ControlOutputConnector() {}
-  ControlOutputConnector(juce::String nm)   {}
+  ControlOutputConnector(juce::String nm) : Connector(nm)   {}
   virtual bool isMono() = 0;
   virtual bool isPoly() = 0;
   bool isMidi() override {return false;}
@@ -229,7 +229,7 @@ class MonoControlInputConnector : virtual public ControlInputConnector
 {
 public:
   MonoControlInputConnector() {}
-  MonoControlInputConnector(juce::String nm)   {}
+  MonoControlInputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return true;}
   bool isPoly() {return false;}
 };
@@ -238,7 +238,7 @@ class MonoAudioOutputConnector : virtual public AudioOutputConnector
 {
 public:
   MonoAudioOutputConnector() {}
-  MonoAudioOutputConnector(juce::String nm)   {}
+  MonoAudioOutputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return true;}
   bool isPoly() {return false;}
 };
@@ -246,6 +246,8 @@ public:
 class MonoControlOutputConnector : virtual public ControlOutputConnector
 {
 public:
+  MonoControlOutputConnector() {}
+  MonoControlOutputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return true;}
   bool isPoly() {return false;}
 };
@@ -253,6 +255,8 @@ public:
 class PolyAudioInputConnector : virtual public AudioInputConnector
 {
 public:
+  PolyAudioInputConnector() {}
+  PolyAudioInputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
@@ -260,6 +264,8 @@ public:
 class PolyControlInputConnector : virtual public ControlInputConnector
 {
 public:
+  PolyControlInputConnector() {}
+  PolyControlInputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
@@ -267,6 +273,8 @@ public:
 class PolyAudioOutputConnector : virtual public AudioOutputConnector
 {
 public:
+  PolyAudioOutputConnector() {}
+  PolyAudioOutputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };
@@ -274,6 +282,8 @@ public:
 class PolyControlOutputConnector : virtual public ControlOutputConnector
 {
 public:
+  PolyControlOutputConnector() {}
+  PolyControlOutputConnector(juce::String nm) : Connector(nm)   {}
   bool isMono() {return false;}
   bool isPoly() {return true;}
 };

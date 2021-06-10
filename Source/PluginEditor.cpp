@@ -19,7 +19,7 @@ SC_ServerAudioProcessorEditor::SC_ServerAudioProcessorEditor (SC_ServerAudioProc
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
-    testmain(1, argv);
+//    testmain(1, argv);
 }
 
 SC_ServerAudioProcessorEditor::~SC_ServerAudioProcessorEditor()

@@ -55,7 +55,6 @@ void SynthVoice::controllerMoved(int controllerNumber, int newControllerValue)
 
 void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannels)
 {
- 
 //  adsr.setSampleRate(sampleRate);
   juce::dsp::ProcessSpec spec;
   spec.maximumBlockSize = samplesPerBlock;
