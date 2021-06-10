@@ -20,7 +20,7 @@ enum ValueType
   Control
 };
 
-class Value
+class SCValue
 {
 public:
   ValueType type;
@@ -29,7 +29,7 @@ public:
 typedef uint8_t midi_note_t;
 typedef uint8_t midi_vel_t;
 
-class MidiNoteValue : public Value
+class MidiNoteValue : virtual public SCValue
 {
 public:  
   ValueType type {MidiNote};
