@@ -21,12 +21,13 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound *sound)
 
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
-  std::cout << "Midi Note" << midiNoteNumber << ", " << velocity << std::endl;
   MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
   MidiNoteValue* val = new MidiNoteValue();
   val->note = midiNoteNumber;
   val->vel = (int) (velocity * 127.0f);
   node->setValue(*val);
+  SwitchValue gate = new SwitchValue(true);
+  node->setGate(gate);
 
 //  osc.setWaveFrequency(midiNoteNumber);
 //  adsr.noteOn();
@@ -39,6 +40,8 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
   val->note = 0;
   val->vel = 0;
   node->setValue(*val);
+  SwitchValue gate = new SwitchValue{false};
+  node->setGate(gate);
   if (!allowTailOff ) //|| !adsr.isActive())
   {
     clearCurrentNote();

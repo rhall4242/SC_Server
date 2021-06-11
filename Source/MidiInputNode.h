@@ -21,15 +21,17 @@ public:
   MidiInputNode(juce::String nm);
 
   NodeType type {MIDI_Input_Node};
-//  juce::String name {"unnamed"};
 
   void process(int64_t ticks) override;
 
   void setValue(MidiNoteValue val) { value = val; }
   MidiNoteValue getValue() { return value; }
+  void setGate(SwitchValue g) { gate = g; }
+  SwitchValue getGate() { return gate; }
 
 private:
 
   MidiNoteValue value;
+  SwitchValue gate {false};
 
 };

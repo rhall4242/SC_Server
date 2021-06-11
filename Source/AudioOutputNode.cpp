@@ -13,7 +13,7 @@
 AudioOutputNode::AudioOutputNode(juce::String nm)
 {
   name = juce::String(nm);
-  MonoAudioInputConnector* in = new MonoAudioInputConnector("AudioInput");
+  MonoAudioInputConnector* in = new MonoAudioInputConnector("AudioInput", this);
   inputs[in->getName()] = in;
 }
 

@@ -17,7 +17,8 @@ enum ValueType
   MidiNote = 1,
   OSC,
   Audio,
-  Control
+  Control,
+  Switch
 };
 
 class SCValue
@@ -42,5 +43,13 @@ class AudioSampleValue : virtual public SCValue
 {
 public:  
   ValueType type {Audio};
-  float sample;
+  float sample {0.0f};
+};
+
+class SwitchValue : virtual public SCValue
+{
+public:  
+  SwitchValue(bool b) {switchval = b;}
+  ValueType type {Switch};
+  bool switchval {false};
 };

@@ -13,9 +13,11 @@
 SimpleOscNode::SimpleOscNode(juce::String nm)
 {
   name = juce::String(nm);
-  MidiInputConnector* in = new MidiInputConnector("MidiInput");
+  MidiInputConnector* in = new MidiInputConnector("MidiInput", this);
   inputs[in->getName()] = in;
-  MonoAudioOutputConnector* out = new MonoAudioOutputConnector("AudioOutput");
+  MonoControlInputConnector* gate = new MonoControlInputConnector("GateInput", this);
+  inputs[gate->getName()] = gate;
+  MonoAudioOutputConnector* out = new MonoAudioOutputConnector("AudioOutput", this);
   outputs[out->getName()] = out;
 }
 

@@ -11,9 +11,7 @@
 #pragma once
 
 #include <JuceHeader.h>
-#include "Connector.h"
 #include "Node.h"
-#include "Value.h"
 
 class AudioOutputNode : virtual public Node
 {

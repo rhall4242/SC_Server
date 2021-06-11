@@ -28,11 +28,23 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
     synth.nodeTree.addNode(simpleOscNode);
     AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioInputNode");
     synth.nodeTree.addNode(audioOutputNode);
+    MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
+    MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(simpleOscNode->inputs["MidiInput"]);
+    Connection *c1 = new Connection();
+    c1->connect(midiOut, midiIn);
+    MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
+    MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(simpleOscNode->inputs["GateInput"]);
+    Connection *c2 = new Connection();
+    c2->connect(gateOut, gateIn);
+    MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(simpleOscNode->outputs["AudioOutput"]);
+    MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
+    Connection *c3 = new Connection();
+    c3->connect(audioOut, audioIn);
     synth.addSound(new SynthSound());
-//    for (int i = 0; i < maxPolyphony; i++)
-//    {
+    for (int i = 0; i < maxPolyphony; i++)
+    {
         synth.addVoice(new SynthVoice(&synth));
-//    }
+    }
 }
 
 SC_ServerAudioProcessor::~SC_ServerAudioProcessor()

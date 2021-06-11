@@ -12,8 +12,8 @@
 
 #include <JuceHeader.h>
 
-#include "Connector.h"
 #include "Value.h"
+#include "Connector.h"
 
 enum NodeType
 {
