@@ -19,5 +19,20 @@ AudioOutputNode::AudioOutputNode(juce::String nm)
 
 void AudioOutputNode::process(int64_t ticks)
 {
-
+  MonoAudioInputConnector* in = dynamic_cast<MonoAudioInputConnector*>(inputs["AudioInput"]);
+  if (in->isConnected())
+  {
+    MonoAudioOutputConnector* from = dynamic_cast<MonoAudioOutputConnector*>(in->from);
+    Node* fromNode = from->owner;
+    if (!fromNode->isReady())
+    {
+      fromNode->process(ticks);
+    }
+    value = static_cast<AudioSampleValue*>(from->value);
+  }
+  else
+  {
+    value = defaultValue;
+  }
+  ready = true;
 }

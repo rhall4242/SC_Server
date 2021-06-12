@@ -37,7 +37,7 @@ public:
   virtual void setConnected(bool v) {connected = v;}
   juce::String getName() {return name;}
   juce::String name {"{unnamed}"};
-  SCValue value;
+  SCValue *value;
   Node* owner;
 private:
   bool connected {false};
@@ -56,12 +56,12 @@ public:
   InputConnector(juce::String nm, Node* o) : Connector(nm, o)  {}
   bool isInput() override {return true;}
   bool isOutput() override {return false;}
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0;
-  virtual bool isMidi() = 0;
-  virtual bool isOsc() = 0;
-  virtual bool isAudio() = 0;
-  virtual bool isControl() = 0;
+  virtual bool isMono() override = 0;
+  virtual bool isPoly() override = 0;
+  virtual bool isMidi() override = 0;
+  virtual bool isOsc() override = 0;
+  virtual bool isAudio() override = 0;
+  virtual bool isControl() override = 0;
   OutputConnector* from;
 };
 
@@ -76,12 +76,12 @@ public:
   OutputConnector(juce::String nm, Node* o) : Connector(nm, o)   {}
   bool isInput() override {return false;}
   bool isOutput() override {return true;}
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0;
-  virtual bool isMidi() = 0;
-  virtual bool isOsc() = 0;
-  virtual bool isAudio() = 0;
-  virtual bool isControl() = 0; 
+  virtual bool isMono() override = 0;
+  virtual bool isPoly() override = 0;
+  virtual bool isMidi() override = 0;
+  virtual bool isOsc() override = 0;
+  virtual bool isAudio() override = 0;
+  virtual bool isControl() override = 0; 
   std::map<juce::String, InputConnector*> to;
 };
 
@@ -111,8 +111,8 @@ class OscInputConnector : virtual public InputConnector
 public:
   OscInputConnector() {}
   OscInputConnector(juce::String nm, Node* o) : Connector(nm, o)   {}
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0;
+  virtual bool isMono() override = 0;
+  virtual bool isPoly() override = 0;
   bool isMidi() override {return false;}
   bool isOsc() override {return true;}
   bool isAudio() override {return false;}
@@ -128,8 +128,8 @@ class AudioInputConnector : virtual public InputConnector
 public:
   AudioInputConnector() {}
   AudioInputConnector(juce::String nm, Node* o) : Connector(nm, o)  {}
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0;
+  virtual bool isMono() override = 0;
+  virtual bool isPoly() override = 0;
   bool isMidi() override {return false;}
   bool isOsc() override {return false;}
   bool isAudio() override {return true;}
@@ -145,8 +145,8 @@ class ControlInputConnector : virtual public InputConnector
 public:
   ControlInputConnector() {}
   ControlInputConnector(juce::String nm, Node* o) : Connector(nm, o)   {}
-  virtual bool isMono() = 0;
-  virtual bool isPoly() = 0; 
+  virtual bool isMono() override = 0;
+  virtual bool isPoly() override = 0; 
   bool isMidi() override {return false;}
   bool isOsc() override {return false;}
   bool isAudio() override {return false;}

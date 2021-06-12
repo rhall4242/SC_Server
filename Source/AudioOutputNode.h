@@ -22,11 +22,12 @@ public:
 
   void process(int64_t ticks) override;
 
-  void setValue(AudioSampleValue val) { value = val; }
-  AudioSampleValue getValue() { return value; }
+  void setValue(AudioSampleValue *val) { value = val; }
+  AudioSampleValue* getValue() { return value; }
 
 private:
 
-  AudioSampleValue value;
+  AudioSampleValue *defaultValue = new AudioSampleValue();;
+  AudioSampleValue *value = defaultValue;
 
 };

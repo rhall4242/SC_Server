@@ -21,5 +21,5 @@ MidiInputNode::MidiInputNode(juce::String nm)
 
 void MidiInputNode::process(int64_t ticks)
 {
-
+  ready = true;
 }

@@ -29,6 +29,8 @@ public:
   std::map<juce::String, InputConnector*> inputs;
   std::map<juce::String, OutputConnector*> outputs;
   juce::String name;
+  bool ready {false};
+  bool isReady() { return ready; }
 
   virtual void process(int64_t ticks) = 0;
 };
@@ -38,4 +40,5 @@ class NodeTree : virtual public std::map<juce::String, Node*>
 public:
   void addNode(Node *node);
   Node *getByName(juce::String name);
+  void clearAllReadyFlags();
 };

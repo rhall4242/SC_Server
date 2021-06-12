@@ -14,6 +14,7 @@
 #include "Synth.h"
 #include "SynthSound.h"
 #include "MidiInputNode.h"
+#include "AudioOutputNode.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {

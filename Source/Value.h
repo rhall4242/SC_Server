@@ -31,22 +31,23 @@ typedef uint8_t midi_note_t;
 typedef uint8_t midi_vel_t;
 
 
-class MidiNoteValue : virtual public SCValue
+class MidiNoteValue : public SCValue
 {
 public:  
   ValueType type {MidiNote};
-  midi_note_t note;
-  midi_vel_t vel;
+  int64_t start_time {0};
+  midi_note_t note {0};
+  midi_vel_t vel {0};
 };
 
-class AudioSampleValue : virtual public SCValue
+class AudioSampleValue : public SCValue
 {
 public:  
   ValueType type {Audio};
   float sample {0.0f};
 };
 
-class SwitchValue : virtual public SCValue
+class SwitchValue : public SCValue
 {
 public:  
   SwitchValue(bool b) {switchval = b;}

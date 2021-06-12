@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<JUCERPROJECT id="C9ZE0q" name="SC_Server" projectType="audioplug" useAppConfig="0"
+<JUCERPROJECT id="C9ZE0q" name="SC_Server" projectType="audioplug" useAppConfig="1"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
               pluginVST3Category="Instrument,Synth" pluginManufacturer="Hallwood Engineering">
   <MAINGROUP id="iBbURr" name="SC_Server">
