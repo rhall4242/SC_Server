@@ -21,5 +21,9 @@ MidiInputNode::MidiInputNode(juce::String nm)
 
 void MidiInputNode::process(int64_t ticks)
 {
+  MidiOutputConnector* output = dynamic_cast<MidiOutputConnector*>(outputs["MidiOutput"]);
+  output->value = value;
+  MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(outputs["GateOutput"]);
+  gateOut->value = gate;
   ready = true;
 }

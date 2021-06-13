@@ -41,7 +41,7 @@ void SC_ServerAudioProcessor::nodeInit()
     synth.nodeTree.addNode(midiInputNode);
     SimpleOscNode* simpleOscNode = new SimpleOscNode("SysSimpleOscNode");
     synth.nodeTree.addNode(simpleOscNode);
-    AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioInputNode");
+    AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioOutputNode");
     synth.nodeTree.addNode(audioOutputNode);
     MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
     MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(simpleOscNode->inputs["MidiInput"]);

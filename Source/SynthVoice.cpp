@@ -22,11 +22,11 @@ bool SynthVoice::canPlaySound(juce::SynthesiserSound *sound)
 void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::SynthesiserSound *sound, int currentPitchWheelPosition)
 {
   MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
-  MidiNoteValue* val = new MidiNoteValue();
+  MidiNoteValue* val = node->getValue();
   val->start_time = std::chrono::system_clock::now().time_since_epoch().count();
   val->note = midiNoteNumber;
   val->vel = (int) (velocity * 127.0f);
-  node->setValue(*val);
+  node->setValue(val);
   SwitchValue* gate = new SwitchValue(true);
   gate->switchval = true;
   node->setGate(gate);
@@ -38,11 +38,11 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
 {
 //  adsr.noteOff();
   MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
-  MidiNoteValue* val = new MidiNoteValue();
+  MidiNoteValue* val = node->getValue();
   val->start_time = std::chrono::system_clock::now().time_since_epoch().count();
   val->note = 0;
   val->vel = 0;
-  node->setValue(*val);
+  node->setValue(val);
   SwitchValue* gate = new SwitchValue{false};
   gate->switchval = false;
   node->setGate(gate);
@@ -76,8 +76,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
   jassert(isPrepared);
-  if (!isVoiceActive())
-    return;
+//  if (!isVoiceActive())
+//    return;
   synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
   synthBuffer.clear();
   juce::dsp::AudioBlock<float> audioBlock { synthBuffer };

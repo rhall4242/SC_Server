@@ -23,9 +23,10 @@ Node* NodeTree::getByName(juce::String name)
 
 void NodeTree::clearAllReadyFlags()
 {
-  std::map<juce::String, Node*>::iterator it = begin();
+  iterator it = begin();
   while (it != end())
   {
     it->second->ready = false;
+    it++;
   }
 }

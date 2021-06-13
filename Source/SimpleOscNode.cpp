@@ -66,6 +66,8 @@ void SimpleOscNode::process(int64_t ticks)
   {
     value->sample = 0.0f;
   }
+  MonoAudioOutputConnector* output = dynamic_cast<MonoAudioOutputConnector*>(outputs["AudioOutput"]);
+  output->value = value;
   ready = true;
 
 }
