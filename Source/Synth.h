@@ -14,7 +14,7 @@
 
 #include "Node.h"
 
-class Synth : virtual public juce::Synthesiser
+class Synth : public juce::Synthesiser
 {
 public:
     Synth() : juce::Synthesiser() {}

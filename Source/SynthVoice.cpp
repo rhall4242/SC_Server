@@ -27,7 +27,8 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
   val->note = midiNoteNumber;
   val->vel = (int) (velocity * 127.0f);
   node->setValue(*val);
-  SwitchValue gate = new SwitchValue(true);
+  SwitchValue* gate = new SwitchValue(true);
+  gate->switchval = true;
   node->setGate(gate);
 
 //  osc.setWaveFrequency(midiNoteNumber);
@@ -42,7 +43,8 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
   val->note = 0;
   val->vel = 0;
   node->setValue(*val);
-  SwitchValue gate = new SwitchValue{false};
+  SwitchValue* gate = new SwitchValue{false};
+  gate->switchval = false;
   node->setGate(gate);
   if (!allowTailOff ) //|| !adsr.isActive())
   {

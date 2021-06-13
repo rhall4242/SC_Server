@@ -22,6 +22,21 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
                        ), apvts(*this, nullptr, "Parameters", createParams())
 #endif
 {
+    synth.addSound(new SynthSound());
+    for (int i = 0; i < maxPolyphony; i++)
+    {
+        synth.addVoice(new SynthVoice(&synth));
+    }
+    nodeInit();
+    std::cout << "SC_Server Initialized" << std::endl;
+}
+
+SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
+{
+}
+
+void SC_ServerAudioProcessor::nodeInit()
+{
     MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
     synth.nodeTree.addNode(midiInputNode);
     SimpleOscNode* simpleOscNode = new SimpleOscNode("SysSimpleOscNode");
@@ -40,16 +55,7 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
     MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
     Connection *c3 = new Connection();
     c3->connect(audioOut, audioIn);
-    synth.addSound(new SynthSound());
-    for (int i = 0; i < maxPolyphony; i++)
-    {
-        synth.addVoice(new SynthVoice(&synth));
-    }
-    std::cout << "SC_Server Initialized" << std::endl;
-}
 
-SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
-{
 }
 
 //==============================================================================

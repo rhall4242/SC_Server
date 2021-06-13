@@ -65,6 +65,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioProcessorValueTreeState apvts;
 
+    void nodeInit();
 
 private:
 
