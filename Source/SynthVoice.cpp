@@ -24,6 +24,7 @@ void SynthVoice::startNote(int midiNoteNumber, float velocity, juce::Synthesiser
   MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
   MidiNoteValue* val = node->getValue();
   val->start_time = std::chrono::system_clock::now().time_since_epoch().count();
+  val->sample = 0;
   val->note = midiNoteNumber;
   val->vel = (int) (velocity * 127.0f);
   node->setValue(val);
@@ -40,6 +41,7 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
   MidiInputNode* node = dynamic_cast<MidiInputNode*>(synth->nodeTree.getByName("SysMidiInputNode"));
   MidiNoteValue* val = node->getValue();
   val->start_time = std::chrono::system_clock::now().time_since_epoch().count();
+  val->sample = 0;
   val->note = 0;
   val->vel = 0;
   node->setValue(val);
@@ -81,12 +83,12 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
   synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
   synthBuffer.clear();
   juce::dsp::AudioBlock<float> audioBlock { synthBuffer };
+  auto ticks = std::chrono::system_clock::now().time_since_epoch().count();
+  AudioOutputNode* out = dynamic_cast<AudioOutputNode*>(synth->nodeTree["SysAudioOutputNode"]);
   for (int i = 0; i < numSamples; i++)
   {
     synth->nodeTree.clearAllReadyFlags();
-    auto ticks = std::chrono::system_clock::now().time_since_epoch().count();
-    AudioOutputNode* out = dynamic_cast<AudioOutputNode*>(synth->nodeTree["SysAudioOutputNode"]);
-    out->process(ticks);
+    out->process(ticks, i);
     auto val = out->getValue();
     synthBuffer.setSample(0, i, val->sample);
   }

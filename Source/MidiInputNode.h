@@ -22,7 +22,7 @@ public:
 
   NodeType type {MIDI_Input_Node};
 
-  void process(int64_t ticks) override;
+  void process(int64_t ticks, int sample) override;
 
   void setValue(MidiNoteValue* val) { value = val; }
   MidiNoteValue* getValue() { return value; }

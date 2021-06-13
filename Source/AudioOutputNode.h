@@ -20,7 +20,7 @@ public:
 
   NodeType type {Audio_Output_Node};
 
-  void process(int64_t ticks) override;
+  void process(int64_t ticks, int sample) override;
 
   void setValue(AudioSampleValue *val) { value = val; }
   AudioSampleValue* getValue() { return value; }

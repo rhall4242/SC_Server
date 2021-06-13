@@ -36,6 +36,7 @@ class MidiNoteValue : public SCValue
 public:  
   ValueType type {MidiNote};
   int64_t start_time {0};
+  int sample;
   midi_note_t note {0};
   midi_vel_t vel {0};
 };

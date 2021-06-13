@@ -21,7 +21,7 @@ SimpleOscNode::SimpleOscNode(juce::String nm)
   outputs[out->getName()] = out;
 }
 
-void SimpleOscNode::process(int64_t ticks)
+void SimpleOscNode::process(int64_t ticks, int sample)
 {
   MidiInputConnector* in = dynamic_cast<MidiInputConnector*>(inputs["MidiInput"]);
   if (in->isConnected())
@@ -30,7 +30,7 @@ void SimpleOscNode::process(int64_t ticks)
     Node* fromNode = from->owner;
     if (!fromNode->isReady())
     {
-      fromNode->process(ticks);
+      fromNode->process(ticks, sample);
     }
     note = static_cast<MidiNoteValue*>(from->value);
   }
@@ -45,7 +45,7 @@ void SimpleOscNode::process(int64_t ticks)
     Node* fromNode = from->owner;
     if (!fromNode->isReady())
     {
-      fromNode->process(ticks);
+      fromNode->process(ticks, sample);
     }
     gate = static_cast<SwitchValue*>(from->value);
   }
@@ -56,7 +56,8 @@ void SimpleOscNode::process(int64_t ticks)
   if (gate->switchval)
   {
     auto freq = juce::MidiMessage::getMidiNoteInHertz(note->note);
-    auto delta = (ticks - note->start_time) / (float) std::chrono::system_clock::period::den;
+//    auto delta = ((ticks - note->start_time) / (float) std::chrono::system_clock::period::den) + (sample / 48000.0);
+    auto delta = ((float) note->sample) / 48000.0f;
     auto period = 1.0f / freq;
     auto phase = (fmod(delta, period) / period) * juce::MathConstants<float>::twoPi;
     auto vel = ((float) note->vel) / 127.0;

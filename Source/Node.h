@@ -32,7 +32,7 @@ public:
   bool ready {false};
   bool isReady() { return ready; }
 
-  virtual void process(int64_t ticks) = 0;
+  virtual void process(int64_t ticks, int sample) = 0;
 };
 
 class NodeTree : virtual public std::map<juce::String, Node*>

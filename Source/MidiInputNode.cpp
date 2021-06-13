@@ -19,8 +19,9 @@ MidiInputNode::MidiInputNode(juce::String nm)
   outputs[gate->getName()] = gate;
 }
 
-void MidiInputNode::process(int64_t ticks)
+void MidiInputNode::process(int64_t ticks, int sample)
 {
+  value->sample++;
   MidiOutputConnector* output = dynamic_cast<MidiOutputConnector*>(outputs["MidiOutput"]);
   output->value = value;
   MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(outputs["GateOutput"]);
