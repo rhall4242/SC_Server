@@ -39,22 +39,40 @@ void SC_ServerAudioProcessor::nodeInit()
 {
     MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
     synth.nodeTree.addNode(midiInputNode);
-    SimpleOscNode* simpleOscNode = new SimpleOscNode("SysSimpleOscNode");
-    synth.nodeTree.addNode(simpleOscNode);
+    MonoOsc1Node* monoOsc1Node = new MonoOsc1Node("SysMonoOsc1Node");
+    synth.nodeTree.addNode(monoOsc1Node);
+    MonoOsc1Node* monoOsc1Node2 = new MonoOsc1Node("SysMonoOsc1Node2");
+    synth.nodeTree.addNode(monoOsc1Node2);
     AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioOutputNode");
     synth.nodeTree.addNode(audioOutputNode);
+    Value8Node* value8Node = new Value8Node("Value8Node");
+    synth.nodeTree.addNode(value8Node);
     MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
-    MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(simpleOscNode->inputs["MidiInput"]);
+    MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(monoOsc1Node->inputs["MidiInput"]);
     Connection *c1 = new Connection();
     c1->connect(midiOut, midiIn);
     MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
-    MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(simpleOscNode->inputs["GateInput"]);
+    MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["GateInput"]);
     Connection *c2 = new Connection();
     c2->connect(gateOut, gateIn);
-    MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(simpleOscNode->outputs["AudioOutput"]);
+    MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node->outputs["AudioOutput"]);
     MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
     Connection *c3 = new Connection();
     c3->connect(audioOut, audioIn);
+    MidiInputConnector* midiIn2 =  dynamic_cast<MidiInputConnector*>(monoOsc1Node2->inputs["MidiInput"]);
+    Connection *c4 = new Connection();
+    c4->connect(midiOut, midiIn2);
+    MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
+    Connection *c5 = new Connection();
+    c5->connect(gateOut, gateIn2);
+    MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
+    MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
+    Connection *c6 = new Connection();
+    c6->connect(audioOut2, fmIn);
+    MonoControlOutputConnector* ratioOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V1Output"]);
+    MonoControlInputConnector* ratioIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["RatioInput"]);
+    Connection *c7 = new Connection();
+    c7->connect(ratioOut, ratioIn);
 
 }
 

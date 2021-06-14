@@ -18,6 +18,7 @@ enum ValueType
   OSC,
   Audio,
   Control,
+  Scalar,
   Switch
 };
 
@@ -46,6 +47,14 @@ class AudioSampleValue : public SCValue
 public:  
   ValueType type {Audio};
   float sample {0.0f};
+};
+
+class ScalarValue : public SCValue
+{
+public:  
+  ScalarValue(float v = 0.0f) { val = v; }
+  ValueType type {Scalar};
+  float val {0.0f};
 };
 
 class SwitchValue : public SCValue

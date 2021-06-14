@@ -19,7 +19,9 @@ enum NodeType
 {
   MIDI_Input_Node = 1,
   Audio_Output_Node,
-  Simple_Osc_Node
+  Simple_Osc_Node,
+  Mono_Osc_1_Node,
+  Value_8_Node
 };
 
 class Node

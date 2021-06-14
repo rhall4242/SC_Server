@@ -104,6 +104,8 @@ OBJECTS_STANDALONE_PLUGIN := \
   $(JUCE_OBJDIR)/include_juce_audio_plugin_client_Standalone_1a871192.o \
 
 OBJECTS_SHARED_CODE := \
+  $(JUCE_OBJDIR)/Value8Node_94a39c92.o \
+  $(JUCE_OBJDIR)/MonoOsc1Node_6b63c340.o \
   $(JUCE_OBJDIR)/AudioOutputNode_b567a6fa.o \
   $(JUCE_OBJDIR)/SimpleOscNode_228db370.o \
   $(JUCE_OBJDIR)/Synth_d919089d.o \
@@ -176,6 +178,16 @@ $(JUCE_OBJDIR)/include_juce_audio_plugin_client_Standalone_1a871192.o: ../../Juc
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
 	@echo "Compiling include_juce_audio_plugin_client_Standalone.cpp"
 	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_STANDALONE_PLUGIN) $(JUCE_CFLAGS_STANDALONE_PLUGIN) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/Value8Node_94a39c92.o: ../../Source/Value8Node.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling Value8Node.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
+
+$(JUCE_OBJDIR)/MonoOsc1Node_6b63c340.o: ../../Source/MonoOsc1Node.cpp
+	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
+	@echo "Compiling MonoOsc1Node.cpp"
+	$(V_AT)$(CXX) $(JUCE_CXXFLAGS) $(JUCE_CPPFLAGS_SHARED_CODE) $(JUCE_CFLAGS_SHARED_CODE) -o "$@" -c "$<"
 
 $(JUCE_OBJDIR)/AudioOutputNode_b567a6fa.o: ../../Source/AudioOutputNode.cpp
 	-$(V_AT)mkdir -p $(JUCE_OBJDIR)
