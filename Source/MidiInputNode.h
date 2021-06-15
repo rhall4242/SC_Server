@@ -28,6 +28,7 @@ public:
   MidiNoteValue* getValue() { return value; }
   void setGate(SwitchValue* g) { gate = g; }
   SwitchValue* getGate() { return gate; }
+  void updateConnections() override {}
 
 private:
 

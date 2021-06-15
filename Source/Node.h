@@ -33,6 +33,7 @@ public:
   juce::String name;
   bool ready {false};
   bool isReady() { return ready; }
+  virtual void updateConnections() { }
 
   virtual void process(int64_t ticks, int sample) = 0;
 };

@@ -9,6 +9,7 @@
 */
 
 #include "Connector.h"
+#include "Node.h"
 
 ///
 /// Connect to an InputConnection to an OutputConnection
@@ -22,6 +23,8 @@ void Connection::connect(OutputConnector* f, InputConnector* t)
   to = t;
   from->to.insert(std::make_pair(t->getName(), t));
   from->setConnected(true);
+  from->owner->updateConnections();
   to->from = f;
   to->setConnected(true);
+  to->owner->updateConnections();
 }

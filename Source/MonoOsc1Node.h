@@ -27,7 +27,21 @@ public:
   void setValue(AudioSampleValue* val) { value = val; }
   AudioSampleValue* getValue() { return value; }
 
+  void updateConnections() override;
+
 private:
+
+  MidiInputConnector* midiIn;
+  MidiOutputConnector* midiFrom;
+  MonoControlInputConnector* gateIn;
+  MonoControlOutputConnector* gateFrom;
+  MonoControlInputConnector* levelIn;
+  MonoControlOutputConnector* levelFrom;
+  MonoControlInputConnector* ratioIn;
+  MonoControlOutputConnector* ratioFrom;
+  MonoAudioInputConnector* fmIn;
+  MonoAudioOutputConnector* fmFrom;
+
   MidiNoteValue* defaultNote = new MidiNoteValue();
   SwitchValue* defaultGate = new SwitchValue(false);
   AudioSampleValue* defaultValue = new AudioSampleValue();

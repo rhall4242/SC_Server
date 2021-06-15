@@ -29,6 +29,10 @@ Value8Node::Value8Node(juce::String nm)
   outputs[v7out->getName()] = v7out;
   MonoControlOutputConnector* v8out = new MonoControlOutputConnector("V8Output", this);
   outputs[v8out->getName()] = v8out;
+  MonoControlOutputConnector* tout = new MonoControlOutputConnector("TrueOutput", this);
+  outputs[tout->getName()] = tout;
+  MonoControlOutputConnector* fout = new MonoControlOutputConnector("FalseOutput", this);
+  outputs[fout->getName()] = fout;
 }
 
 void Value8Node::process(int64_t ticks, int sample)
@@ -49,5 +53,9 @@ void Value8Node::process(int64_t ticks, int sample)
   v7out->value = v7;
   MonoControlOutputConnector* v8out = dynamic_cast<MonoControlOutputConnector*>(outputs["V8Output"]);
   v8out->value = v8;
+  MonoControlOutputConnector* tout = dynamic_cast<MonoControlOutputConnector*>(outputs["TrueOutput"]);
+  tout->value = t;
+  MonoControlOutputConnector* fout = dynamic_cast<MonoControlOutputConnector*>(outputs["FalseOutput"]);
+  fout->value = f;
   ready = true;
 }

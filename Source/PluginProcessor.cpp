@@ -63,8 +63,9 @@ void SC_ServerAudioProcessor::nodeInit()
     Connection *c4 = new Connection();
     c4->connect(midiOut, midiIn2);
     MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
+    MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
     Connection *c5 = new Connection();
-    c5->connect(gateOut, gateIn2);
+    c5->connect(trueOut, gateIn2);
     MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
     MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
     Connection *c6 = new Connection();

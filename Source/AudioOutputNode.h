@@ -24,6 +24,7 @@ public:
 
   void setValue(AudioSampleValue *val) { value = val; }
   AudioSampleValue* getValue() { return value; }
+  void updateConnections() override {}
 
 private:
 

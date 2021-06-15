@@ -78,8 +78,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
   jassert(isPrepared);
-//  if (!isVoiceActive())
-//    return;
+  if (!isVoiceActive())
+    return;
   synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
   synthBuffer.clear();
   juce::dsp::AudioBlock<float> audioBlock { synthBuffer };
