@@ -58,6 +58,7 @@ void MonoOsc1Node::updateConnections()
   {
     fmFrom = dynamic_cast<MonoAudioOutputConnector*>(fmIn->from);
   }
+  output = dynamic_cast<MonoAudioOutputConnector*>(outputs["AudioOutput"]);
 }
 
 void MonoOsc1Node::process(int64_t ticks, int sample)
@@ -152,7 +153,6 @@ void MonoOsc1Node::process(int64_t ticks, int sample)
   {
     value->sample = 0.0f;
   }
-  MonoAudioOutputConnector* output = dynamic_cast<MonoAudioOutputConnector*>(outputs["AudioOutput"]);
   output->value = value;
   ready = true;
 

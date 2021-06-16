@@ -41,6 +41,7 @@ private:
   MonoControlOutputConnector* ratioFrom;
   MonoAudioInputConnector* fmIn;
   MonoAudioOutputConnector* fmFrom;
+  MonoAudioOutputConnector* output;
 
   MidiNoteValue* defaultNote = new MidiNoteValue();
   SwitchValue* defaultGate = new SwitchValue(false);

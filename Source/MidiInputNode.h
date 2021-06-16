@@ -31,6 +31,8 @@ public:
   void updateConnections() override {}
 
 private:
+  MidiOutputConnector* midiOut;
+  MonoControlOutputConnector* gateOut;
 
   MidiNoteValue* value = new MidiNoteValue();;
   SwitchValue* gate = new SwitchValue(false);

@@ -74,7 +74,6 @@ void SC_ServerAudioProcessor::nodeInit()
     MonoControlInputConnector* ratioIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["RatioInput"]);
     Connection *c7 = new Connection();
     c7->connect(ratioOut, ratioIn);
-
 }
 
 //==============================================================================

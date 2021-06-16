@@ -13,18 +13,16 @@
 MidiInputNode::MidiInputNode(juce::String nm)
 {
   name = juce::String(nm);
-  MidiOutputConnector* out = new MidiOutputConnector("MidiOutput", this);
-  outputs[out->getName()] = out;
-  MonoControlOutputConnector* gate = new MonoControlOutputConnector("GateOutput", this);
-  outputs[gate->getName()] = gate;
+  midiOut = new MidiOutputConnector("MidiOutput", this);
+  outputs[midiOut->getName()] = midiOut;
+  gateOut = new MonoControlOutputConnector("GateOutput", this);
+  outputs[gateOut->getName()] = gateOut;
 }
 
 void MidiInputNode::process(int64_t ticks, int sample)
 {
   value->sample++;
-  MidiOutputConnector* output = dynamic_cast<MidiOutputConnector*>(outputs["MidiOutput"]);
-  output->value = value;
-  MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(outputs["GateOutput"]);
+  midiOut->value = value;
   gateOut->value = gate;
   ready = true;
 }

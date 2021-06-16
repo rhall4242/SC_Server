@@ -35,27 +35,31 @@ Value8Node::Value8Node(juce::String nm)
   outputs[fout->getName()] = fout;
 }
 
+void Value8Node::updateConnections()
+{
+  v1out = dynamic_cast<MonoControlOutputConnector*>(outputs["V1Output"]);
+  v2out = dynamic_cast<MonoControlOutputConnector*>(outputs["V2Output"]);
+  v3out = dynamic_cast<MonoControlOutputConnector*>(outputs["V3Output"]);
+  v4out = dynamic_cast<MonoControlOutputConnector*>(outputs["V4Output"]);
+  v5out = dynamic_cast<MonoControlOutputConnector*>(outputs["V5Output"]);
+  v6out = dynamic_cast<MonoControlOutputConnector*>(outputs["V6Output"]);
+  v7out = dynamic_cast<MonoControlOutputConnector*>(outputs["V7Output"]);
+  v8out = dynamic_cast<MonoControlOutputConnector*>(outputs["V8Output"]);
+  tout = dynamic_cast<MonoControlOutputConnector*>(outputs["TrueOutput"]);
+  fout = dynamic_cast<MonoControlOutputConnector*>(outputs["FalseOutput"]);
+}
+
 void Value8Node::process(int64_t ticks, int sample)
 {
-  MonoControlOutputConnector* v1out = dynamic_cast<MonoControlOutputConnector*>(outputs["V1Output"]);
   v1out->value = v1;
-  MonoControlOutputConnector* v2out = dynamic_cast<MonoControlOutputConnector*>(outputs["V2Output"]);
   v2out->value = v2;
-  MonoControlOutputConnector* v3out = dynamic_cast<MonoControlOutputConnector*>(outputs["V3Output"]);
   v3out->value = v3;
-  MonoControlOutputConnector* v4out = dynamic_cast<MonoControlOutputConnector*>(outputs["V4Output"]);
   v4out->value = v4;
-  MonoControlOutputConnector* v5out = dynamic_cast<MonoControlOutputConnector*>(outputs["V5Output"]);
   v5out->value = v5;
-  MonoControlOutputConnector* v6out = dynamic_cast<MonoControlOutputConnector*>(outputs["V6Output"]);
   v6out->value = v6;
-  MonoControlOutputConnector* v7out = dynamic_cast<MonoControlOutputConnector*>(outputs["V7Output"]);
   v7out->value = v7;
-  MonoControlOutputConnector* v8out = dynamic_cast<MonoControlOutputConnector*>(outputs["V8Output"]);
   v8out->value = v8;
-  MonoControlOutputConnector* tout = dynamic_cast<MonoControlOutputConnector*>(outputs["TrueOutput"]);
   tout->value = t;
-  MonoControlOutputConnector* fout = dynamic_cast<MonoControlOutputConnector*>(outputs["FalseOutput"]);
   fout->value = f;
   ready = true;
 }
