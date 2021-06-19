@@ -47,6 +47,9 @@ void SC_ServerAudioProcessor::nodeInit()
     synth.nodeTree.addNode(audioOutputNode);
     Value8Node* value8Node = new Value8Node("Value8Node");
     synth.nodeTree.addNode(value8Node);
+    MSEGNode* msegNode = new MSEGNode("MSEGNode");
+    msegNode->loadDesc("/home/rhall/JUCE/projects/SC_Server/TestMSEG.json");
+    synth.nodeTree.addNode(msegNode);
     MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
     MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(monoOsc1Node->inputs["MidiInput"]);
     Connection *c1 = new Connection();
@@ -65,7 +68,7 @@ void SC_ServerAudioProcessor::nodeInit()
     MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
     MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
     Connection *c5 = new Connection();
-    c5->connect(trueOut, gateIn2);
+    c5->connect(gateOut, gateIn2);
     MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
     MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
     Connection *c6 = new Connection();
@@ -74,6 +77,14 @@ void SC_ServerAudioProcessor::nodeInit()
     MonoControlInputConnector* ratioIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["RatioInput"]);
     Connection *c7 = new Connection();
     c7->connect(ratioOut, ratioIn);
+    MonoControlInputConnector* gateIn3 =  dynamic_cast<MonoControlInputConnector*>(msegNode->inputs["GateInput"]);
+    Connection *c8 = new Connection();
+    c8->connect(gateOut, gateIn3);
+    MonoControlInputConnector* levelIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["LevelInput"]);
+    MonoControlOutputConnector* msegOut = dynamic_cast<MonoControlOutputConnector*>(msegNode->outputs["MSEGOutput"]);
+    Connection *c9 = new Connection();
+    c9->connect(msegOut, levelIn);
+
 }
 
 //==============================================================================

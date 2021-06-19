@@ -5,6 +5,8 @@
               pluginVST3Category="Instrument,Synth" pluginManufacturer="Hallwood Engineering">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
+      <FILE id="eZ0czT" name="MSEGNode.cpp" compile="1" resource="0" file="Source/MSEGNode.cpp"/>
+      <FILE id="skKz32" name="MSEGNode.h" compile="0" resource="0" file="Source/MSEGNode.h"/>
       <FILE id="FdljjO" name="Value8Node.cpp" compile="1" resource="0" file="Source/Value8Node.cpp"/>
       <FILE id="Tc1YVO" name="Value8Node.h" compile="0" resource="0" file="Source/Value8Node.h"/>
       <FILE id="myZKwp" name="MonoOsc1Node.cpp" compile="1" resource="0"

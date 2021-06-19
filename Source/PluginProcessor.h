@@ -20,6 +20,7 @@
 #include "MonoOsc1Node.h"
 #include "AudioOutputNode.h"
 #include "Value8Node.h"
+#include "MSEGNode.h"
 
 //==============================================================================
 /**

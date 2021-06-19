@@ -21,7 +21,8 @@ enum NodeType
   Audio_Output_Node,
   Simple_Osc_Node,
   Mono_Osc_1_Node,
-  Value_8_Node
+  Value_8_Node,
+  MSEG_Node
 };
 
 class Node

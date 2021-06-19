@@ -1,0 +1,6 @@
+{
+    "sample_rate" : 48000,
+    "sustain" : true,
+    "sustain_point" : [150, 0.85],
+    "points" : [[0, 0.0], [500, 1.0], [25000, 0.25]]
+}
