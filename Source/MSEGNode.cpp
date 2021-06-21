@@ -63,11 +63,21 @@ void MSEGNode::process(int64_t ticks, int sample)
         mseg_sample = 0;
       }
     } 
-    lastGate = gate->switchval;   
+    lastGate = gate->switchval;
+    if (state == Idle)
+    {
+      value->val = retval;
+      output->value = value;
+      ready = true;
+      return;
+    }   
   }
   else
   {
+    value->val = retval;
+    output->value = value;
     gate = defaultGate;
+    ready = true;
     return;
   }
   if (levelIn->isConnected())
@@ -87,25 +97,38 @@ void MSEGNode::process(int64_t ticks, int sample)
   {
     retval = desc.pointList[0].second;
   }
-  if (mseg_sample >= desc.pointList[desc.pointList.size()-1].first * scale)
+  else if (desc.sustain && state == Play && mseg_sample >= desc.sustain_point.first)
+  {
+    state = Sustain;
+    retval = desc.sustain_point.second;
+  }
+  else if (mseg_sample >= desc.pointList[desc.pointList.size()-1].first * scale)
   {
     retval = desc.pointList[desc.pointList.size()-1].second;
+    state = Idle;
+    lastGate = false;
   }
-  for (int i = 0; i < desc.pointList.size(); i++)
+  else
   {
-    auto p1 = desc.pointList[i].first * scale;
-    auto p2 = desc.pointList[i+1].first * scale;
-    if (mseg_sample > p1 && mseg_sample < p2)
+    for (int i = 0; i < desc.pointList.size(); i++)
     {
-      auto xdelta = ((float)(mseg_sample - p1)) / ((float)(p2 - p1));
-      auto ydelta = desc.pointList[i+1].second - desc.pointList[i].second;
-      retval = desc.pointList[i].second + (xdelta * ydelta);
+      auto p1 = desc.pointList[i].first * scale;
+      auto p2 = desc.pointList[i+1].first * scale;
+      if (mseg_sample > p1 && mseg_sample < p2)
+      {
+        auto xdelta = ((float)(mseg_sample - p1)) / ((float)(p2 - p1));
+        auto ydelta = desc.pointList[i+1].second - desc.pointList[i].second;
+        retval = desc.pointList[i].second + (xdelta * ydelta);
+      }
     }
   }
   value->val = retval;
   output->value = value;
   ready = true;
-  mseg_sample++;
+  if (state != Sustain)
+  {
+    mseg_sample++;
+  }
 }
 
 void MSEGNode::loadDesc(juce::String filename)

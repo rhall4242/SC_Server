@@ -48,10 +48,10 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
   SwitchValue* gate = new SwitchValue{false};
   gate->switchval = false;
   node->setGate(gate);
-  if (!allowTailOff ) //|| !adsr.isActive())
-  {
-    clearCurrentNote();
-  }
+//  if (!allowTailOff ) //|| !adsr.isActive())
+//  {
+//    clearCurrentNote();
+//  }
 }
 
 void SynthVoice::pitchWheelMoved(int newPitchWheelValue)
@@ -89,22 +89,18 @@ void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int sta
   {
     synth->nodeTree.clearAllReadyFlags();
     out->process(ticks, i);
-    auto val = out->getValue();
-    synthBuffer.setSample(0, i, val->sample);
+    for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
+    {
+      auto val = out->getValue(channel);
+      synthBuffer.setSample(channel, i, val->sample);
+    }
   }
-//  osc.getNextAudioBlock(audioBlock);
   gain.process(juce::dsp::ProcessContextReplacing<float> (audioBlock));
 //  adsr.applyEnvelopeToBuffer(synthBuffer, 0, synthBuffer.getNumSamples());
   for (int channel = 0; channel < outputBuffer.getNumChannels(); ++channel)
   {
-      outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
+    outputBuffer.addFrom(channel, startSample, synthBuffer, channel, 0, numSamples);
   }
-  /*
-  if (!adsr.isActive())
-  {
-    clearCurrentNote();
-  }
-*/
 }
 
 

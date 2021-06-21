@@ -50,6 +50,7 @@ void SC_ServerAudioProcessor::nodeInit()
     MSEGNode* msegNode = new MSEGNode("MSEGNode");
     msegNode->loadDesc("/home/rhall/JUCE/projects/SC_Server/TestMSEG.json");
     synth.nodeTree.addNode(msegNode);
+    MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
     MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
     MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(monoOsc1Node->inputs["MidiInput"]);
     Connection *c1 = new Connection();
@@ -57,7 +58,7 @@ void SC_ServerAudioProcessor::nodeInit()
     MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
     MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["GateInput"]);
     Connection *c2 = new Connection();
-    c2->connect(gateOut, gateIn);
+    c2->connect(trueOut, gateIn);
     MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node->outputs["AudioOutput"]);
     MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
     Connection *c3 = new Connection();
@@ -66,9 +67,8 @@ void SC_ServerAudioProcessor::nodeInit()
     Connection *c4 = new Connection();
     c4->connect(midiOut, midiIn2);
     MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
-    MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
     Connection *c5 = new Connection();
-    c5->connect(gateOut, gateIn2);
+    c5->connect(trueOut, gateIn2);
     MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
     MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
     Connection *c6 = new Connection();

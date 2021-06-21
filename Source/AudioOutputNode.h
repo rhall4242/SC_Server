@@ -22,8 +22,8 @@ public:
 
   void process(int64_t ticks, int sample) override;
 
-  void setValue(AudioSampleValue *val) { value = val; }
-  AudioSampleValue* getValue() { return value; }
+  void setValue(AudioSampleValue *val, int channel = 0) { value = val; }
+  AudioSampleValue* getValue(int channel = 0) { return value; }
   void updateConnections() override {}
 
 private:
