@@ -41,6 +41,8 @@ private:
   MonoControlOutputConnector* ratioFrom;
   MonoAudioInputConnector* fmIn;
   MonoAudioOutputConnector* fmFrom;
+  MonoControlInputConnector* optionIn;
+  MonoControlOutputConnector* optionFrom;
   MonoAudioOutputConnector* output;
 
   MidiNoteValue* defaultNote = new MidiNoteValue();
@@ -49,10 +51,12 @@ private:
   ScalarValue* defaultLevel = new ScalarValue(1.0f);
   AudioSampleValue* defaultFM = new AudioSampleValue();
   ScalarValue* defaultRatio = new ScalarValue(1.0f);
+  ScalarValue* defaultOption = new ScalarValue(1.0f);
   SwitchValue* gate = defaultGate;
   MidiNoteValue* note = defaultNote;
   AudioSampleValue* value = defaultValue;
   ScalarValue* level = defaultLevel;
   AudioSampleValue* fm = defaultFM;
   ScalarValue* ratio = defaultRatio;
+  ScalarValue* option = defaultOption;
 };

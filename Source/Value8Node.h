@@ -28,8 +28,8 @@ public:
 private:
   ScalarValue* v1 = new ScalarValue(3.0f);
   ScalarValue* v2 = new ScalarValue(0.75f);
-  ScalarValue* v3 = new ScalarValue();
-  ScalarValue* v4 = new ScalarValue();
+  ScalarValue* v3 = new ScalarValue(2.0f);
+  ScalarValue* v4 = new ScalarValue(3.0f);
   ScalarValue* v5 = new ScalarValue();
   ScalarValue* v6 = new ScalarValue();
   ScalarValue* v7 = new ScalarValue();

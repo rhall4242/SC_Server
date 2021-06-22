@@ -3104,6 +3104,11 @@ void MonoOsc1Node::updateConnections()
   {
     fmFrom = dynamic_cast<MonoAudioOutputConnector*>(fmIn->from);
   }
+  optionIn = dynamic_cast<MonoControlInputConnector*>(inputs["OptionInput"]);
+  if (optionIn->isConnected())
+  {
+    optionFrom = dynamic_cast<MonoControlOutputConnector*>(optionIn->from);
+  }
   output = dynamic_cast<MonoAudioOutputConnector*>(outputs["AudioOutput"]);
 }
 
@@ -3198,6 +3203,19 @@ void MonoOsc1Node::process(int64_t ticks, int sample)
   {
     ratio = defaultRatio;
   }
+  if (optionIn->isConnected())
+  {
+    Node* fromNode = optionFrom->owner;
+    if (!fromNode->isReady())
+    {
+      fromNode->process(ticks, sample);
+    }
+    option = static_cast<ScalarValue*>(optionFrom->value);
+  }
+  else
+  {
+    option = defaultOption;
+  }
   if (gate->switchval)
   {
     auto freq = juce::MidiMessage::getMidiNoteInHertz(note->note) * ratio->val;
@@ -3206,7 +3224,8 @@ void MonoOsc1Node::process(int64_t ticks, int sample)
     auto phase = (fmod(delta, period) / period) * juce::MathConstants<float>::twoPi;
     auto vel = ((float) note->vel) / 127.0;
     auto lev = level->val;
-    value->sample = lev * vel * oscFunc(phase + (fm->sample * juce::MathConstants<float>::pi), 4096);
+    auto offset = ((int) option->val) * 2048;
+    value->sample = lev * vel * oscFunc(phase + (fm->sample * juce::MathConstants<float>::pi), offset);
   }
   else
   {

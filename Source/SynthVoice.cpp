@@ -170,5 +170,13 @@ void SynthVoice::nodeInit()
     MonoControlOutputConnector* msegOut2 = dynamic_cast<MonoControlOutputConnector*>(msegNode2->outputs["MSEGOutput"]);
     Connection *c11 = new Connection();
     c11->connect(msegOut2, levelIn2);
+    MonoControlInputConnector* optionIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["OptionInput"]);
+    MonoControlOutputConnector* optionOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V3Output"]);
+    Connection *c12 = new Connection();
+    c12->connect(optionOut, optionIn);
+    MonoControlInputConnector* optionIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["OptionInput"]);
+    MonoControlOutputConnector* optionOut2 = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V4Output"]);
+    Connection *c13 = new Connection();
+    c13->connect(optionOut, optionIn);
 
 }
