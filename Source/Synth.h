@@ -18,5 +18,4 @@ class Synth : public juce::Synthesiser
 {
 public:
     Synth() : juce::Synthesiser() {}
-    NodeTree nodeTree;
 };

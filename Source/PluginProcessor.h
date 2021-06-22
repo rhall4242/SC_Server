@@ -28,7 +28,7 @@
 class SC_ServerAudioProcessor  : public juce::AudioProcessor
 {
 public:
-    int maxPolyphony = 1;
+    int maxPolyphony = 3;
 
     //==============================================================================
     SC_ServerAudioProcessor();
@@ -67,8 +67,6 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioProcessorValueTreeState apvts;
-
-    void nodeInit();
 
 private:
 

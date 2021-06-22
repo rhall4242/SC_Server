@@ -15,6 +15,7 @@
 #include "SynthSound.h"
 #include "MidiInputNode.h"
 #include "AudioOutputNode.h"
+#include "PluginProcessor.h"
 
 class SynthVoice : public juce::SynthesiserVoice
 {
@@ -29,6 +30,9 @@ class SynthVoice : public juce::SynthesiserVoice
     void prepareToPlay(double sampleRate, int samplesPerBlock, int outputChannel);
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     void update(const float attack, const float decay, const float sustain, const float release);
+    NodeTree nodeTree;
+    void nodeInit();
+
 
   private:
 

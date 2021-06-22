@@ -27,7 +27,6 @@ SC_ServerAudioProcessor::SC_ServerAudioProcessor()
     {
         synth.addVoice(new SynthVoice(&synth));
     }
-    nodeInit();
     std::cout << "SC_Server Initialized" << std::endl;
 }
 
@@ -35,57 +34,6 @@ SC_ServerAudioProcessor::~SC_ServerAudioProcessor()
 {
 }
 
-void SC_ServerAudioProcessor::nodeInit()
-{
-    MidiInputNode* midiInputNode = new MidiInputNode("SysMidiInputNode");
-    synth.nodeTree.addNode(midiInputNode);
-    MonoOsc1Node* monoOsc1Node = new MonoOsc1Node("SysMonoOsc1Node");
-    synth.nodeTree.addNode(monoOsc1Node);
-    MonoOsc1Node* monoOsc1Node2 = new MonoOsc1Node("SysMonoOsc1Node2");
-    synth.nodeTree.addNode(monoOsc1Node2);
-    AudioOutputNode* audioOutputNode = new AudioOutputNode("SysAudioOutputNode");
-    synth.nodeTree.addNode(audioOutputNode);
-    Value8Node* value8Node = new Value8Node("Value8Node");
-    synth.nodeTree.addNode(value8Node);
-    MSEGNode* msegNode = new MSEGNode("MSEGNode");
-    msegNode->loadDesc("/home/rhall/JUCE/projects/SC_Server/TestMSEG.json");
-    synth.nodeTree.addNode(msegNode);
-    MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
-    MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
-    MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(monoOsc1Node->inputs["MidiInput"]);
-    Connection *c1 = new Connection();
-    c1->connect(midiOut, midiIn);
-    MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
-    MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["GateInput"]);
-    Connection *c2 = new Connection();
-    c2->connect(trueOut, gateIn);
-    MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node->outputs["AudioOutput"]);
-    MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
-    Connection *c3 = new Connection();
-    c3->connect(audioOut, audioIn);
-    MidiInputConnector* midiIn2 =  dynamic_cast<MidiInputConnector*>(monoOsc1Node2->inputs["MidiInput"]);
-    Connection *c4 = new Connection();
-    c4->connect(midiOut, midiIn2);
-    MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
-    Connection *c5 = new Connection();
-    c5->connect(trueOut, gateIn2);
-    MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
-    MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
-    Connection *c6 = new Connection();
-    c6->connect(audioOut2, fmIn);
-    MonoControlOutputConnector* ratioOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V1Output"]);
-    MonoControlInputConnector* ratioIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["RatioInput"]);
-    Connection *c7 = new Connection();
-    c7->connect(ratioOut, ratioIn);
-    MonoControlInputConnector* gateIn3 =  dynamic_cast<MonoControlInputConnector*>(msegNode->inputs["GateInput"]);
-    Connection *c8 = new Connection();
-    c8->connect(gateOut, gateIn3);
-    MonoControlInputConnector* levelIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["LevelInput"]);
-    MonoControlOutputConnector* msegOut = dynamic_cast<MonoControlOutputConnector*>(msegNode->outputs["MSEGOutput"]);
-    Connection *c9 = new Connection();
-    c9->connect(msegOut, levelIn);
-
-}
 
 //==============================================================================
 const juce::String SC_ServerAudioProcessor::getName() const
