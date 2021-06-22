@@ -21,6 +21,7 @@
 #include "AudioOutputNode.h"
 #include "Value8Node.h"
 #include "MSEGNode.h"
+#include "OSC.h"
 
 //==============================================================================
 /**
@@ -67,11 +68,12 @@ public:
     void getStateInformation (juce::MemoryBlock& destData) override;
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioProcessorValueTreeState apvts;
+    Synth synth;
 
 private:
 
-    Synth synth;
     juce::AudioProcessorValueTreeState::ParameterLayout createParams();
+    OscData oscServer;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SC_ServerAudioProcessor)

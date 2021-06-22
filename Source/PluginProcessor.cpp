@@ -109,6 +109,7 @@ void SC_ServerAudioProcessor::prepareToPlay (double sampleRate, int samplesPerBl
             voice->prepareToPlay(sampleRate, samplesPerBlock, getTotalNumOutputChannels());
         }
     }
+    oscServer.startServer(8096, this);
 }
 
 void SC_ServerAudioProcessor::releaseResources()

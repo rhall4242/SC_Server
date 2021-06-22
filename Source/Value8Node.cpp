@@ -63,3 +63,39 @@ void Value8Node::process(int64_t ticks, int sample)
   fout->value = f;
   ready = true;
 }
+
+void Value8Node::setValue(juce::String key, float val)
+{
+  if (key == "V1")
+  {
+    v1->val = val;
+  }
+  else if (key == "V2")
+  {
+    v2->val = val;
+  }
+  else if (key == "V3")
+  {
+    v3->val = val;
+  }
+  else if (key == "V4")
+  {
+    v4->val = val;
+  }
+  else if (key == "V5")
+  {
+    v5->val = val;
+  }
+  else if (key == "V6")
+  {
+    v6->val = val;
+  }
+  else if (key == "V7")
+  {
+    v7->val = val;
+  }
+  else if (key == "V8")
+  {
+    v8->val = val;
+  }
+}

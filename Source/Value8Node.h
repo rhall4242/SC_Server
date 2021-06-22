@@ -25,6 +25,8 @@ public:
   void process(int64_t ticks, int sample) override;
   void updateConnections() override;
 
+  void setValue(juce::String key, float val);
+
 private:
   ScalarValue* v1 = new ScalarValue(3.0f);
   ScalarValue* v2 = new ScalarValue(0.75f);
