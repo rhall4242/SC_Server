@@ -3059,6 +3059,7 @@ float wavetbl[] {
 MonoOsc1Node::MonoOsc1Node(juce::String nm)
 {
   name = juce::String(nm);
+  type = Mono_Osc_1_Node;
   MidiInputConnector* in = new MidiInputConnector("MidiInput", this);
   inputs[in->getName()] = in;
   MonoControlInputConnector* gate = new MonoControlInputConnector("GateInput", this);

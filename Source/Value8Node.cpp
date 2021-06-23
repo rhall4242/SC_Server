@@ -10,8 +10,9 @@
 
 #include "Value8Node.h"
 
-Value8Node::Value8Node(juce::String nm)
+Value8Node::Value8Node(juce::String nm) 
 {
+  type = Value_8_Node;
   name = juce::String(nm);
   MonoControlOutputConnector* v1out = new MonoControlOutputConnector("V1Output", this);
   outputs[v1out->getName()] = v1out;

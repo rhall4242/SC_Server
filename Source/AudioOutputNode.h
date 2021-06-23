@@ -18,8 +18,6 @@ class AudioOutputNode : virtual public Node
 public:
   AudioOutputNode(juce::String nm);
 
-  NodeType type {Audio_Output_Node};
-
   void process(int64_t ticks, int sample) override;
 
   void setValue(AudioSampleValue *val, int channel = 0) { value = val; }

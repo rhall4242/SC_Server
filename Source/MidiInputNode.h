@@ -20,8 +20,6 @@ class MidiInputNode : virtual public Node
 public:
   MidiInputNode(juce::String nm);
 
-  NodeType type {MIDI_Input_Node};
-
   void process(int64_t ticks, int sample) override;
 
   void setValue(MidiNoteValue* val) { value = val; }

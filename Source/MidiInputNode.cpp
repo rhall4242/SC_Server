@@ -13,6 +13,7 @@
 MidiInputNode::MidiInputNode(juce::String nm)
 {
   name = juce::String(nm);
+  type = MIDI_Input_Node;
   midiOut = new MidiOutputConnector("MidiOutput", this);
   outputs[midiOut->getName()] = midiOut;
   gateOut = new MonoControlOutputConnector("GateOutput", this);

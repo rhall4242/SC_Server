@@ -20,8 +20,6 @@ class SimpleOscNode : virtual public Node
 public:
   SimpleOscNode(juce::String nm);
 
-  NodeType type {Simple_Osc_Node};
-
   void process(int64_t ticks, int sample) override;
 
   void setValue(AudioSampleValue* val) { value = val; }

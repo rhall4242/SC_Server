@@ -20,8 +20,6 @@ class MonoOsc1Node : virtual public Node
 public:
   MonoOsc1Node(juce::String nm);
 
-  NodeType type {Mono_Osc_1_Node};
-
   void process(int64_t ticks, int sample) override;
 
   void setValue(AudioSampleValue* val) { value = val; }

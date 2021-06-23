@@ -13,6 +13,7 @@
 MSEGNode::MSEGNode(juce::String nm)
 {
   name = juce::String(nm);
+  type = MSEG_Node;
   MonoControlInputConnector* gate = new MonoControlInputConnector("GateInput", this);
   inputs[gate->getName()] = gate;
   MonoControlInputConnector* level = new MonoControlInputConnector("LevelInput", this);

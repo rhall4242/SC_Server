@@ -13,6 +13,7 @@
 SimpleOscNode::SimpleOscNode(juce::String nm)
 {
   name = juce::String(nm);
+  type = Simple_Osc_Node;
   MidiInputConnector* in = new MidiInputConnector("MidiInput", this);
   inputs[in->getName()] = in;
   MonoControlInputConnector* gate = new MonoControlInputConnector("GateInput", this);

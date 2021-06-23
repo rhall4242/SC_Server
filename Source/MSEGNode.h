@@ -39,8 +39,6 @@ class MSEGNode : virtual public Node
 public:
   MSEGNode(juce::String nm);
 
-  NodeType type {MSEG_Node};
-
   void process(int64_t ticks, int sample) override;
 
   void updateConnections() override;

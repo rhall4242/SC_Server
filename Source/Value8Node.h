@@ -20,8 +20,6 @@ class Value8Node : virtual public Node
 public:
   Value8Node(juce::String nm);
 
-  NodeType type {Value_8_Node};
-
   void process(int64_t ticks, int sample) override;
   void updateConnections() override;
 
