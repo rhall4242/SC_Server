@@ -296,9 +296,19 @@ public:
 class Connection
 {
 public:
+  Connection(juce::String name="");
   OutputConnector* from;
   InputConnector* to;
   void connect(OutputConnector* f, InputConnector* t);
 
   void transfer() {to->value = from->value;}
+
+  juce::String name;
+};
+
+class ConnectionTree : virtual public std::map<juce::String, Connection*>
+{
+public:
+  void addConnection(Connection *conn);
+  Connection *getByName(juce::String name);
 };

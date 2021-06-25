@@ -3116,6 +3116,10 @@ void MonoOsc1Node::updateConnections()
 float oscFunc(float x, int wavestart)
 {
   auto pi2 = juce::MathConstants<float>::twoPi;
+  while (x < 0.0f)
+  {
+    x += pi2;
+  }
   auto fsamp = (fmod(x, pi2)  / pi2) * 2048.0f;
   auto isamp = (int) fsamp;
   auto delta = fsamp - isamp;

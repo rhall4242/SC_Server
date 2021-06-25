@@ -31,6 +31,8 @@ class SynthVoice : public juce::SynthesiserVoice
     void renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples) override;
     void update(const float attack, const float decay, const float sustain, const float release);
     NodeTree nodeTree;
+    ConnectionTree connectionTree;
+    Connection *createConnection(OutputConnector *in, InputConnector *out, juce::String nm = "");
     void nodeInit();
 
 

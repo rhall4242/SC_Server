@@ -51,7 +51,7 @@ void SynthVoice::stopNote(float velocity, bool allowTailOff)
   node->setGate(gate);
 //  if (!allowTailOff ) //|| !adsr.isActive())
 //  {
-//    clearCurrentNote();
+    clearCurrentNote();
 //  }
 }
 
@@ -80,8 +80,8 @@ void SynthVoice::prepareToPlay(double sampleRate, int samplesPerBlock, int outpu
 void SynthVoice::renderNextBlock(juce::AudioBuffer<float> &outputBuffer, int startSample, int numSamples)
 {
   jassert(isPrepared);
-//  if (!isVoiceActive())
-//    return;
+  if (!isVoiceActive())
+    return;
   synthBuffer.setSize(outputBuffer.getNumChannels(), numSamples, false, false, true);
   synthBuffer.clear();
   juce::dsp::AudioBlock<float> audioBlock { synthBuffer };
@@ -132,51 +132,45 @@ void SynthVoice::nodeInit()
     MonoControlOutputConnector* trueOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["TrueOutput"]);
     MidiOutputConnector* midiOut = dynamic_cast<MidiOutputConnector*>(midiInputNode->outputs["MidiOutput"]);
     MidiInputConnector* midiIn =  dynamic_cast<MidiInputConnector*>(monoOsc1Node->inputs["MidiInput"]);
-    Connection *c1 = new Connection();
-    c1->connect(midiOut, midiIn);
+    createConnection(midiOut, midiIn);
     MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
     MonoControlInputConnector* gateIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["GateInput"]);
-    Connection *c2 = new Connection();
-    c2->connect(trueOut, gateIn);
+    createConnection(trueOut, gateIn);
     MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node->outputs["AudioOutput"]);
     MonoAudioInputConnector* audioIn =  dynamic_cast<MonoAudioInputConnector*>(audioOutputNode->inputs["AudioInput"]);
-    Connection *c3 = new Connection();
-    c3->connect(audioOut, audioIn);
+    createConnection(audioOut, audioIn);
     MidiInputConnector* midiIn2 =  dynamic_cast<MidiInputConnector*>(monoOsc1Node2->inputs["MidiInput"]);
-    Connection *c4 = new Connection();
-    c4->connect(midiOut, midiIn2);
+    createConnection(midiOut, midiIn2);
     MonoControlInputConnector* gateIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["GateInput"]);
-    Connection *c5 = new Connection();
-    c5->connect(trueOut, gateIn2);
+    createConnection(trueOut, gateIn2);
     MonoAudioOutputConnector* audioOut2 = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node2->outputs["AudioOutput"]);
     MonoAudioInputConnector* fmIn =  dynamic_cast<MonoAudioInputConnector*>(monoOsc1Node->inputs["FMInput"]);
-    Connection *c6 = new Connection();
-    c6->connect(audioOut2, fmIn);
+    createConnection(audioOut2, fmIn);
     MonoControlOutputConnector* ratioOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V1Output"]);
     MonoControlInputConnector* ratioIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["RatioInput"]);
-    Connection *c7 = new Connection();
-    c7->connect(ratioOut, ratioIn);
+    createConnection(ratioOut, ratioIn);
     MonoControlInputConnector* gateIn3 =  dynamic_cast<MonoControlInputConnector*>(msegNode->inputs["GateInput"]);
-    Connection *c8 = new Connection();
-    c8->connect(gateOut, gateIn3);
+    createConnection(gateOut, gateIn3);
     MonoControlInputConnector* levelIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["LevelInput"]);
     MonoControlOutputConnector* msegOut = dynamic_cast<MonoControlOutputConnector*>(msegNode->outputs["MSEGOutput"]);
-    Connection *c9 = new Connection();
-    c9->connect(msegOut, levelIn);
+    createConnection(msegOut, levelIn);
     MonoControlInputConnector* gateIn4 =  dynamic_cast<MonoControlInputConnector*>(msegNode2->inputs["GateInput"]);
-    Connection *c10 = new Connection();
-    c10->connect(gateOut, gateIn4);
+    createConnection(gateOut, gateIn4);
     MonoControlInputConnector* levelIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["LevelInput"]);
     MonoControlOutputConnector* msegOut2 = dynamic_cast<MonoControlOutputConnector*>(msegNode2->outputs["MSEGOutput"]);
-    Connection *c11 = new Connection();
-    c11->connect(msegOut2, levelIn2);
+    createConnection(msegOut2, levelIn2);
     MonoControlInputConnector* optionIn =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node->inputs["OptionInput"]);
     MonoControlOutputConnector* optionOut = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V3Output"]);
-    Connection *c12 = new Connection();
-    c12->connect(optionOut, optionIn);
+    createConnection(optionOut, optionIn);
     MonoControlInputConnector* optionIn2 =  dynamic_cast<MonoControlInputConnector*>(monoOsc1Node2->inputs["OptionInput"]);
     MonoControlOutputConnector* optionOut2 = dynamic_cast<MonoControlOutputConnector*>(value8Node->outputs["V4Output"]);
-    Connection *c13 = new Connection();
-    c13->connect(optionOut, optionIn);
+    createConnection(optionOut, optionIn);
+}
 
+Connection* SynthVoice::createConnection(OutputConnector *in, InputConnector *out, juce::String nm)
+{
+  Connection *conn = new Connection(nm);
+  connectionTree.addConnection(conn);
+  conn->connect(in, out);
+  return conn;
 }
