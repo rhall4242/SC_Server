@@ -2,39 +2,17 @@
 
 <JUCERPROJECT id="C9ZE0q" name="SC_Server" projectType="audioplug" useAppConfig="1"
               addUsingNamespaceToJuceHeader="0" jucerFormatVersion="1" pluginCharacteristicsValue="pluginIsSynth,pluginWantsMidiIn"
-              pluginVST3Category="Instrument,Synth" pluginManufacturer="Hallwood Engineering">
+              pluginVST3Category="Instrument,Synth" pluginManufacturer="Hallwood Engineering"
+              headerPath="/home/rhall/JUCE/projects/SC_Lib/Source">
   <MAINGROUP id="iBbURr" name="SC_Server">
     <GROUP id="{6D218BCE-080D-87FD-4E20-4561131EE8B7}" name="Source">
       <FILE id="GqQD9P" name="OSC.cpp" compile="1" resource="0" file="Source/OSC.cpp"/>
       <FILE id="K7YpQM" name="OSC.h" compile="0" resource="0" file="Source/OSC.h"/>
-      <FILE id="eZ0czT" name="MSEGNode.cpp" compile="1" resource="0" file="Source/MSEGNode.cpp"/>
-      <FILE id="skKz32" name="MSEGNode.h" compile="0" resource="0" file="Source/MSEGNode.h"/>
-      <FILE id="FdljjO" name="Value8Node.cpp" compile="1" resource="0" file="Source/Value8Node.cpp"/>
-      <FILE id="Tc1YVO" name="Value8Node.h" compile="0" resource="0" file="Source/Value8Node.h"/>
-      <FILE id="myZKwp" name="MonoOsc1Node.cpp" compile="1" resource="0"
-            file="Source/MonoOsc1Node.cpp"/>
-      <FILE id="r3217A" name="MonoOsc1Node.h" compile="0" resource="0" file="Source/MonoOsc1Node.h"/>
-      <FILE id="He9EAK" name="AudioOutputNode.cpp" compile="1" resource="0"
-            file="Source/AudioOutputNode.cpp"/>
-      <FILE id="N3nWkW" name="AudioOutputNode.h" compile="0" resource="0"
-            file="Source/AudioOutputNode.h"/>
-      <FILE id="QTtaa0" name="SimpleOscNode.cpp" compile="1" resource="0"
-            file="Source/SimpleOscNode.cpp"/>
-      <FILE id="zauvc9" name="SimpleOscNode.h" compile="0" resource="0" file="Source/SimpleOscNode.h"/>
       <FILE id="w1RLXw" name="Synth.cpp" compile="1" resource="0" file="Source/Synth.cpp"/>
       <FILE id="IJ05jE" name="Synth.h" compile="0" resource="0" file="Source/Synth.h"/>
       <FILE id="o2AiVY" name="SynthVoice.cpp" compile="1" resource="0" file="Source/SynthVoice.cpp"/>
       <FILE id="Uj9pXs" name="SynthVoice.h" compile="0" resource="0" file="Source/SynthVoice.h"/>
       <FILE id="Uu1FgD" name="SynthSound.h" compile="0" resource="0" file="Source/SynthSound.h"/>
-      <FILE id="QLUFIt" name="MidiInputNode.cpp" compile="1" resource="0"
-            file="Source/MidiInputNode.cpp"/>
-      <FILE id="BA54zB" name="MidiInputNode.h" compile="0" resource="0" file="Source/MidiInputNode.h"/>
-      <FILE id="dQaldy" name="Node.cpp" compile="1" resource="0" file="Source/Node.cpp"/>
-      <FILE id="sLTCaJ" name="Node.h" compile="0" resource="0" file="Source/Node.h"/>
-      <FILE id="y7v4OM" name="Value.cpp" compile="1" resource="0" file="Source/Value.cpp"/>
-      <FILE id="bdNbGD" name="Value.h" compile="0" resource="0" file="Source/Value.h"/>
-      <FILE id="nosrWK" name="Connector.cpp" compile="1" resource="0" file="Source/Connector.cpp"/>
-      <FILE id="uSbnxB" name="Connector.h" compile="0" resource="0" file="Source/Connector.h"/>
       <FILE id="XBu3EV" name="PluginProcessor.cpp" compile="1" resource="0"
             file="Source/PluginProcessor.cpp"/>
       <FILE id="pohF8S" name="PluginProcessor.h" compile="0" resource="0"
@@ -46,7 +24,8 @@
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="0"/>
   <EXPORTFORMATS>
-    <LINUX_MAKE targetFolder="Builds/LinuxMakefile">
+    <LINUX_MAKE targetFolder="Builds/LinuxMakefile" externalLibraries="SC_Lib"
+                extraCompilerFlags="-fPIC">
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug"/>
         <CONFIGURATION isDebug="0" name="Release"/>
