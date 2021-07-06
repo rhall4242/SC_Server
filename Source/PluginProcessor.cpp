@@ -195,3 +195,13 @@ juce::AudioProcessorValueTreeState::ParameterLayout SC_ServerAudioProcessor::cre
 
     return {params.begin(), params.end()};
 }
+
+void SC_ServerAudioProcessor::loadLayout()
+{
+    for (int i = 0; i < synth.getNumVoices(); i++)
+    {
+        std::cout << "Loading layout to voice #" << i << std::endl;
+        SynthVoice* v = dynamic_cast<SynthVoice*>(synth.getVoice(i));
+        v->loadLayout();
+    }
+}

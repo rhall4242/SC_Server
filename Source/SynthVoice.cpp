@@ -169,8 +169,22 @@ void SynthVoice::nodeInit()
 
 Connection* SynthVoice::createConnection(OutputConnector *in, InputConnector *out, juce::String nm)
 {
-  Connection *conn = new Connection(nm);
+  Connection *conn = new Connection(juce::String(nm));
   connectionTree.addConnection(conn);
   conn->connect(in, out);
   return conn;
+}
+
+void SynthVoice::loadLayout()
+{
+  connectionTree.clearTree();
+  nodeTree.clearTree();
+  juce::File f("/home/rhall/JUCE/projects/SC_GUI/Layout1.json");
+  juce::String json = f.loadFileAsString();
+  nodeTree.fromJSON(json);
+  connectionTree.fromJSON(json, &nodeTree);
+  MidiInputNode* midiInputNode = dynamic_cast<MidiInputNode*>(nodeTree.getByName("SysMidiInputNode"));
+  MonoControlOutputConnector* gateOut = dynamic_cast<MonoControlOutputConnector*>(midiInputNode->outputs["GateOutput"]);
+  MonoOsc1Node* monoOsc1Node = dynamic_cast<MonoOsc1Node*>(nodeTree.getByName("MonoOsc1Node"));
+  MonoAudioOutputConnector* audioOut = dynamic_cast<MonoAudioOutputConnector*>(monoOsc1Node->outputs["AudioOutput"]);
 }

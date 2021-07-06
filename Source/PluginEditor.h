@@ -23,6 +23,9 @@ public:
     //==============================================================================
     void paint (juce::Graphics&) override;
     void resized() override;
+    juce::TextButton menuButton {"Menu"};
+    std::function<void()> menuClicked {[this] (){ mainMenu();}};
+    void mainMenu();
 
 private:
     // This reference is provided as a quick way for your editor to

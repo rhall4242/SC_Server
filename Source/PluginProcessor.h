@@ -69,6 +69,7 @@ public:
     void setStateInformation (const void* data, int sizeInBytes) override;
     juce::AudioProcessorValueTreeState apvts;
     Synth synth;
+    void loadLayout();
 
 private:
 

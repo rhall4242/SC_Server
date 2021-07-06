@@ -34,6 +34,7 @@ class SynthVoice : public juce::SynthesiserVoice
     ConnectionTree connectionTree;
     Connection *createConnection(OutputConnector *in, InputConnector *out, juce::String nm = "");
     void nodeInit();
+    void loadLayout();
 
 
   private:

@@ -19,6 +19,8 @@ SC_ServerAudioProcessorEditor::SC_ServerAudioProcessorEditor (SC_ServerAudioProc
     // Make sure that before the constructor has finished, you've set the
     // editor's size to whatever you need it to be.
     setSize (400, 300);
+    menuButton.onClick = menuClicked;
+    addAndMakeVisible(menuButton);
 //    testmain(1, argv);
 }
 
@@ -39,6 +41,25 @@ void SC_ServerAudioProcessorEditor::paint (juce::Graphics& g)
 
 void SC_ServerAudioProcessorEditor::resized()
 {
-    // This is generally where you'll want to lay out the positions of any
-    // subcomponents in your editor..
+    menuButton.setBounds(15, 15, 50, 20);
 }
+
+void SC_ServerAudioProcessorEditor::mainMenu()
+{
+    juce::PopupMenu m;
+    m.addItem (1, "Load Layout");
+ 
+    const int result = m.show();
+ 
+    if (result == 0)
+    {
+        // user dismissed the menu without picking anything
+    }
+    else if (result == 1)
+    {
+      audioProcessor.loadLayout();
+    }      
+
+
+}
+
